@@ -1,7 +1,8 @@
 ## General
 This repository contains the code for **LigUnity**: **Hierarchical affinity landscape navigation through learning a shared pocket-ligand space.**
 
-**We are pleased to announce that our paper has been accepted by Patterns and is featured as the cover article for the October 2025 issue!**
+**We are excited to announce that our paper has been accepted by Patterns and is featured as the cover article for the October 2025 issue!**
+
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green?style=flat-square)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE)
 [![Data License](https://img.shields.io/badge/Data%20License-CC%20By%20NC%204.0-red?style=flat-square)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/DATA_LICENSE)
@@ -21,9 +22,6 @@ This repository contains the code for **LigUnity**: **Hierarchical affinity land
       </p>
       <p>
         At the center, stands a lighthouse symbolizing the AI method <strong>LigUnity</strong>. Its beam illuminates several sailboats, guiding them toward glowing buoys, which symbolize ligands with high activity found by LigUnity. The work by Feng et al. highlights the power of AI-driven computational methods to efficiently find active ligands and optimize their activity, opening up new therapeutic avenues for various diseases.
-      </p>
-      <p>
-        <em>Image credit: Bin Feng, International Digital Economy Academy.</em>
       </p>
     </td>
   </tr>
