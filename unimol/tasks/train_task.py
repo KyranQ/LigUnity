@@ -99,6 +99,57 @@ def scaffold_split(smi_list, num_sup, seed=1):
         idx_list_all += idx_list
 
     return idx_list_all
+
+
+def scaffold_balanced_sample_indices(smi_list: List[str], k_shot: int, seed: int = 1) -> List[int]:
+    """Select support indices with scaffold-balanced sampling.
+
+    The strategy first picks one ligand from each scaffold (after shuffling for
+    randomness). If the requested k_shot is larger than the number of scaffolds,
+    the remaining quota is filled by iterating over scaffolds in descending order
+    of their remaining sizes so larger scaffolds can contribute more ligands.
+    """
+
+    if k_shot <= 0:
+        return []
+
+    scaffold_to_indices: Dict[str, List[int]] = {}
+    for idx, smi in enumerate(smi_list):
+        scaffold = generate_scaffold(smi)
+        scaffold_to_indices.setdefault(scaffold, []).append(idx)
+
+    random.seed(seed)
+    scaffold_items: List[Tuple[str, List[int]]] = list(scaffold_to_indices.items())
+    # shuffle ligands within each scaffold for randomness
+    for _, indices in scaffold_items:
+        random.shuffle(indices)
+    # shuffle scaffold order so ties in the later stable sort are randomized
+    random.shuffle(scaffold_items)
+
+    selected: List[int] = []
+    # first pass: one per scaffold if available
+    for _, indices in scaffold_items:
+        if len(selected) >= k_shot:
+            break
+        if indices:
+            selected.append(indices.pop(0))
+
+    # allocate remaining quota proportionally to scaffold sizes
+    while len(selected) < k_shot:
+        progress = False
+        # stable sort keeps randomized tie order
+        scaffold_items.sort(key=lambda item: len(item[1]), reverse=True)
+        for _, indices in scaffold_items:
+            if not indices:
+                continue
+            selected.append(indices.pop(0))
+            progress = True
+            if len(selected) >= k_shot:
+                break
+        if not progress:
+            break
+
+    return selected
     
 
 def is_older(_version):
@@ -367,12 +418,15 @@ class pocketscreen(UnicoreTask):
                 k_shot = int(self.args.sup_num * len(pair_label["ligands"]))
             else:
                 k_shot = int(self.args.sup_num)
-            random.seed(self.args.seed)
-            random.shuffle(pair_label["ligands"])
+            smi_list = [lig["smi"] for lig in pair_label["ligands"]]
+            support_indices = scaffold_balanced_sample_indices(smi_list, k_shot, self.args.seed)
+            remain_indices = [idx for idx in range(len(pair_label["ligands"])) if idx not in set(support_indices)]
             if split == "train":
-                pair_label["ligands"] = sorted(pair_label["ligands"][:k_shot], key=lambda x: x["act"], reverse=True)
+                pair_label["ligands"] = [pair_label["ligands"][idx] for idx in support_indices]
+                pair_label["ligands"] = sorted(pair_label["ligands"], key=lambda x: x["act"], reverse=True)
             else:
-                pair_label["ligands"] = sorted(pair_label["ligands"][k_shot:], key=lambda x: x["act"], reverse=True)
+                pair_label["ligands"] = [pair_label["ligands"][idx] for idx in remain_indices]
+                pair_label["ligands"] = sorted(pair_label["ligands"], key=lambda x: x["act"], reverse=True)
 
         pocket_dataset = self.load_pockets_dataset(pocket_lmdb, is_train=split=="train")
         mol_dataset = self.load_mols_dataset(ligands_lmdb, "atoms", "coordinates", is_train=split=="train")
