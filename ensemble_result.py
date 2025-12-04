@@ -139,8 +139,9 @@ if __name__ == '__main__':
     elif mode == "fewshot":
         test_set = sys.argv[2]
         support_num = sys.argv[3]
-        begin = 15
-        end = 20
+        # begin = 15
+        # end = 20
+        
         metric_fusion_all = []
         for seed in range(1, 11):
             res_repeat_pocket = []
@@ -161,6 +162,11 @@ if __name__ == '__main__':
                         continue
                     res_pocket = [json.loads(line) for line in open(res_file_pocket)][1:]
                     res_seq = [json.loads(line) for line in open(res_file_seq)][1:]
+                    # 动态聚合最后5个epoch
+                    end = len(res_pocket)
+                    begin = max(0, end - 5)
+                    # 建议加上这句，运行的时候能看到："Ensembling epochs 6 to 10"
+                    print(f"  Seed {seed} Repeat {repeat}: Found {end} epochs. Using epochs {begin+1}-{end} for ensemble.")
                     res_pocket = get_ensemble_res(res_pocket, begin, end)
                     res_seq = get_ensemble_res(res_seq, begin, end)
                     res_repeat_pocket.append(res_pocket)
