@@ -2,6 +2,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 import json
+from collections import Counter
 
 # from IPython import embed as debug_embedded
 import logging
@@ -235,6 +236,11 @@ class pocketscreen(UnicoreTask):
             "--sup-num",
             default=16,
             type=float
+        )
+        parser.add_argument(
+            "--log-scaffold-support",
+            action="store_true",
+            help="log scaffold distribution of selected few-shot supports for verification",
         )
         parser.add_argument(
             "--valid-set",
