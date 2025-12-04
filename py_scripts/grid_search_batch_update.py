@@ -4,6 +4,15 @@ This script runs `unicore-train` multiple times while sweeping
 `--batch-size` and `--update-freq`. It mirrors the training options
 used in `train.sh` and keeps outputs for each combination in separate
 folders under the chosen save root.
+
+You can launch it as a standalone utility, e.g.:
+
+```
+python py_scripts/grid_search_batch_update.py ./data/ --batch-sizes 16,32 --update-freqs 1,2 --run-name bs_uf_search
+```
+
+Each run stores logs and a `config.json` that records the exact command
+and effective batch size so you can trace results later.
 """
 
 import argparse
@@ -176,7 +185,11 @@ def run_grid_search(args: argparse.Namespace) -> None:
         write_metadata(metadata_path, cmd, batch_size, update_freq)
 
         log_path = os.path.join(log_root, f"train_log_{tag}.txt")
-        print(f"[GridSearch] Running batch_size={batch_size}, update_freq={update_freq}")
+        effective_batch = batch_size * update_freq
+        print(
+            "[GridSearch] Running batch_size=%s, update_freq=%s (effective per-GPU batch=%s)"
+            % (batch_size, update_freq, effective_batch)
+        )
         print(f"             Logs: {log_path}")
         print(f"             Save dir: {run_root}")
         if args.dry_run:

@@ -47,9 +47,23 @@ https://colab.research.google.com/drive/1gf0HhgyqI4qBjUAUICCvDa-FnTaARmR_?usp=sh
 
 Please feel free to contact me by email if there is any problem with the code or paper: fengbin@idea.edu.cn.
 
+### 联合网格搜索 batch_size 与 update_freq
+
+如果需要同时调优 `batch_size` 和 `update_freq`，可以直接使用脚本 `py_scripts/grid_search_batch_update.py`：
+
+- 按需修改参数：`--batch-sizes` 和 `--update-freqs` 为逗号分隔的整型列表；`--run-name`、`--save-root` 控制输出命名和存放位置。
+- 运行示例：
+
+  ```bash
+  python py_scripts/grid_search_batch_update.py ./data/ --batch-sizes 16,24,32 --update-freqs 1,2,4 --run-name bs_uf_search
+  ```
+
+- 每个组合会在 `save_root/run_name_bs*_uf*/` 下生成独立的保存目录、TensorBoard 日志，以及记录完整命令和有效 batch（`batch_size * update_freq`）的 `config.json` 方便回溯。
+- 若先验证命令是否正确，可添加 `--dry-run` 查看展开后的训练命令而不实际启动训练。
+
 ### Resource availability
 
-The datasets for LigUnity were collected from ChEMBL version 34 and BindingDB version 2024m5. Our training dataset is available on figshare (https://doi.org/10.6084/m9.figshare.27966819). Our PocketAffDB with protein and pocket PDB structures is available on figshare (https://doi.org/10.6084/m9.figshare.29379161). 
+The datasets for LigUnity were collected from ChEMBL version 34 and BindingDB version 2024m5. Our training dataset is available on figshare (https://doi.org/10.6084/m9.figshare.27966819). Our PocketAffDB with protein and pocket PDB structures is available on figshare (https://doi.org/10.6084/m9.figshare.29379161).
 
 ## Abstract
 
