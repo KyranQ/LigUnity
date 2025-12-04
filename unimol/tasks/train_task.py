@@ -430,15 +430,6 @@ class pocketscreen(UnicoreTask):
             if split == "train":
                 pair_label["ligands"] = [pair_label["ligands"][idx] for idx in support_indices]
                 pair_label["ligands"] = sorted(pair_label["ligands"], key=lambda x: x["act"], reverse=True)
-                if getattr(self.args, "log_scaffold_support", False):
-                    scaffolds = [generate_scaffold(lig["smi"]) for lig in pair_label["ligands"]]
-                    scaffold_counts = Counter(scaffolds)
-                    logger.info(
-                        "FEP support scaffolds for %s (k=%d): %s",
-                        pair_label["assay_id"],
-                        len(pair_label["ligands"]),
-                        dict(scaffold_counts),
-                    )
             else:
                 pair_label["ligands"] = [pair_label["ligands"][idx] for idx in remain_indices]
                 pair_label["ligands"] = sorted(pair_label["ligands"], key=lambda x: x["act"], reverse=True)
