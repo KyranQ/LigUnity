@@ -74,6 +74,19 @@ def get_ensemble_res(res_list, begin=0, end=-1):
 
     return ret
 
+
+def combine_weighted(pocket_res, protein_res, alpha):
+    ret = {}
+    for k in pocket_res.keys():
+        pocket_pred = np.array(pocket_res[k]["pred"])
+        protein_pred = np.array(protein_res[k]["pred"])
+        fused_pred = alpha * pocket_pred + (1 - alpha) * protein_pred
+        ret[k] = {
+            "pred": fused_pred,
+            "exp": pocket_res[k]["exp"]
+        }
+    return ret
+
 def avg_metric(metric_lst_all):
     ret_metric_dict = {}
     for metric_lst in metric_lst_all:
@@ -106,6 +119,25 @@ def get_metric(res):
     return metric_dict
 
 
+def average_metric_dicts(metric_dicts):
+    if not metric_dicts:
+        return {}
+    targets = metric_dicts[0].keys()
+    averaged = {}
+    for target in targets:
+        metrics = [m[target] for m in metric_dicts if target in m]
+        if not metrics:
+            continue
+        agg = copy.deepcopy(metrics[0])
+        for m in metrics[1:]:
+            for key in ["pearsonr", "spearmanr", "r2"]:
+                agg[key] += m[key]
+        for key in ["pearsonr", "spearmanr", "r2"]:
+            agg[key] = agg[key] / len(metrics)
+        averaged[target] = agg
+    return averaged
+
+
 if __name__ == '__main__':
     mode = sys.argv[1]
     if mode == "zeroshot":
@@ -132,16 +164,23 @@ if __name__ == '__main__':
                     res_protein = read_zeroshot_res(f"./result/protein_ranking/{test_set}/repeat_{repeat}")
                     res_all_pocket.append(res_pocket)
                     res_all_protein.append(res_protein)
-                res_all_fusion = get_ensemble_res(res_all_pocket + res_all_protein)
-                metrics = get_metric(res_all_fusion)
-                json.dump(metrics, open(f"./result/pocket_ranking/{test_set}_metrics.json", "w"))
-                print_avg_metric(metrics, "Ours")
+                avg_pocket = get_ensemble_res(res_all_pocket)
+                avg_protein = get_ensemble_res(res_all_protein)
+                metrics_all_alpha = {}
+                for step in range(0, 11):
+                    alpha = step / 10
+                    fused = combine_weighted(avg_pocket, avg_protein, alpha)
+                    metrics = get_metric(fused)
+                    metrics_all_alpha[f"alpha_{alpha:.1f}"] = metrics
+                    print(f"alpha={alpha:.1f}")
+                    print_avg_metric(metrics, "Ours")
+                json.dump(metrics_all_alpha, open(f"./result/pocket_ranking/{test_set}_metrics.json", "w"))
     elif mode == "fewshot":
         test_set = sys.argv[2]
         support_num = sys.argv[3]
         begin = 15
         end = 20
-        metric_fusion_all = []
+        metric_fusion_all = {}
         for seed in range(1, 11):
             res_repeat_pocket = []
             res_repeat_seq = []
@@ -165,9 +204,24 @@ if __name__ == '__main__':
                     res_seq = get_ensemble_res(res_seq, begin, end)
                     res_repeat_pocket.append(res_pocket)
                     res_repeat_seq.append(res_seq)
+            if not res_repeat_pocket or not res_repeat_seq:
+                continue
 
-            res_repeat_fusion = get_ensemble_res(res_repeat_pocket + res_repeat_seq)
-            metric_fusion_all.append(get_metric(res_repeat_fusion))
-        metric_fusion_all = avg_metric(list(map(list, zip(*metric_fusion_all))))
-        json.dump(metric_fusion_all, open(f"./result/pocket_ranking/{test_set}_metrics.json", "w"))
-        print_avg_metric(metric_fusion_all, "Ours")
+            avg_pocket = get_ensemble_res(res_repeat_pocket)
+            avg_protein = get_ensemble_res(res_repeat_seq)
+
+            for step in range(0, 11):
+                alpha = step / 10
+                fused = combine_weighted(avg_pocket, avg_protein, alpha)
+                metric_alpha = get_metric(fused)
+                key = f"alpha_{alpha:.1f}"
+                if key not in metric_fusion_all:
+                    metric_fusion_all[key] = []
+                metric_fusion_all[key].append(metric_alpha)
+
+        averaged_metrics = {}
+        for alpha_key, metrics_list in metric_fusion_all.items():
+            averaged_metrics[alpha_key] = average_metric_dicts(metrics_list)
+            print(alpha_key)
+            print_avg_metric(averaged_metrics[alpha_key], "Ours")
+        json.dump(averaged_metrics, open(f"./result/pocket_ranking/{test_set}_metrics.json", "w"))
