@@ -1,68 +1,68 @@
-# Guide: Testing LigUnity on Custom Datasets (e.g., CASP16)
+# 指南：在自定义数据集上测试 LigUnity（以 CASP16 为例）
 
-This guide explains how to test LigUnity's affinity prediction capability on custom datasets, using CASP16 as an example.
+本指南说明如何在自定义数据集上测试 LigUnity 的亲和力预测能力，以 CASP16 数据集为例。
 
-## Overview
+## 概述
 
-To test LigUnity on a new dataset like CASP16, you need to:
-1. Download and prepare your data (proteins and ligands)
-2. Convert the data to LMDB format
-3. Run inference using LigUnity
-4. Analyze the results
+要在新数据集（如 CASP16）上测试 LigUnity，您需要：
+1. 下载并准备数据（蛋白质和配体）
+2. 将数据转换为 LMDB 格式
+3. 使用 LigUnity 运行推理
+4. 分析结果
 
-## Step 1: Download CASP16 Data
+## 第一步：下载 CASP16 数据
 
-Download the CASP16 pharma ligands dataset from:
+从以下链接下载 CASP16 药物配体数据集：
 https://predictioncenter.org/download_area/CASP16/extra_experiments/pharma_ligands/
 
-The CASP16 dataset typically includes:
-- Protein structures (PDB format)
-- Ligand structures (SDF/MOL2 format)
-- Binding site information
+CASP16 数据集通常包括：
+- 蛋白质结构（PDB 格式）
+- 配体结构（SDF/MOL2 格式）
+- 结合位点信息
 
-## Step 2: Prepare Your Data
+## 第二步：准备数据
 
-### Required Data Format
+### 所需数据格式
 
-LigUnity requires two types of input:
-1. **Ligand data**: SMILES strings or 3D structures
-2. **Pocket data**: Protein pocket structures (PDB format) with a reference ligand to define the binding site
+LigUnity 需要两种类型的输入：
+1. **配体数据**：SMILES 字符串或 3D 结构
+2. **口袋数据**：蛋白质口袋结构（PDB 格式），需要参考配体来定义结合位点
 
-### Directory Structure
+### 目录结构
 ```
 your_dataset/
 ├── proteins/
-│   └── target1.pdb          # Protein structure
+│   └── target1.pdb          # 蛋白质结构
 ├── ligands/
-│   └── target1_crystal.mol2 # Reference ligand to define pocket
+│   └── target1_crystal.mol2 # 参考配体（用于定义口袋）
 ├── test_ligands/
-│   └── target1_ligands.sdf  # Ligands to test (or JSON with SMILES)
+│   └── target1_ligands.sdf  # 待测试的配体（或包含 SMILES 的 JSON 文件）
 └── labels/
-    └── target1_labels.json  # Ground truth activities (optional)
+    └── target1_labels.json  # 真实活性值（可选）
 ```
 
-## Step 3: Convert Data to LMDB Format
+## 第三步：转换数据为 LMDB 格式
 
-Use the `py_scripts/write_case_study.py` script to convert your data:
+使用 `py_scripts/write_case_study.py` 脚本转换数据：
 
-### Convert Ligands to LMDB
+### 将配体转换为 LMDB
 ```python
-# Method 1: From SMILES list (JSON file)
+# 方法1：从 SMILES 列表（JSON 文件）
 python py_scripts/write_case_study.py mol ligands.json output_ligands.lmdb
 
-# ligands.json format:
+# ligands.json 格式：
 # ["CC(=O)Nc1ccc...", "COc1ccc...", ...]
 ```
 
-### Convert Pocket to LMDB
+### 将口袋转换为 LMDB
 ```python
-# From PDB + reference ligand (MOL2)
+# 从 PDB + 参考配体（MOL2）
 python py_scripts/write_case_study.py pocket protein.pdb crystal_ligand.mol2 output_pocket.lmdb
 ```
 
-### Custom Script for CASP16
+### CASP16 自定义处理脚本
 
-Here's a complete Python script to process CASP16 data:
+以下是处理 CASP16 数据的完整 Python 脚本：
 
 ```python
 import json
@@ -76,7 +76,7 @@ from biopandas.pdb import PandasPdb
 from biopandas.mol2 import PandasMol2
 
 def gen_conformation(mol, num_conf=1, num_worker=4):
-    """Generate 3D conformation for a molecule."""
+    """为分子生成 3D 构象。"""
     try:
         mol = Chem.AddHs(mol)
         AllChem.EmbedMultipleConfs(mol, numConfs=num_conf, numThreads=num_worker)
@@ -89,7 +89,7 @@ def gen_conformation(mol, num_conf=1, num_worker=4):
     return mol
 
 def process_ligand_sdf(sdf_path, output_lmdb_path):
-    """Convert SDF file to LMDB format for LigUnity."""
+    """将 SDF 文件转换为 LigUnity 使用的 LMDB 格式。"""
     suppl = Chem.SDMolSupplier(sdf_path, removeHs=False)
     data = []
     
@@ -99,7 +99,7 @@ def process_ligand_sdf(sdf_path, output_lmdb_path):
         mol = Chem.RemoveHs(mol)
         smi = Chem.MolToSmiles(mol)
         
-        # Get 3D coordinates
+        # 获取 3D 坐标
         if mol.GetNumConformers() > 0:
             coords = mol.GetConformer().GetPositions()
         else:
@@ -115,16 +115,16 @@ def process_ligand_sdf(sdf_path, output_lmdb_path):
             'coordinates': [np.array(coords)],
             'smi': smi,
             'mol': mol,
-            'label': 1,  # placeholder
+            'label': 1,  # 占位符
         })
     
     write_lmdb(data, output_lmdb_path)
-    print(f"Processed {len(data)} ligands to {output_lmdb_path}")
+    print(f"已处理 {len(data)} 个配体到 {output_lmdb_path}")
 
 def process_pocket_pdb(pdb_path, ligand_path, output_lmdb_path, pocket_name="demo", raid=6.0):
-    """Extract pocket from PDB using reference ligand and save to LMDB."""
+    """使用参考配体从 PDB 中提取口袋并保存为 LMDB。"""
     
-    # Read protein
+    # 读取蛋白质
     pdb_df = PandasPdb().read_pdb(pdb_path)
     protein_coords = pdb_df.df['ATOM'][['x_coord', 'y_coord', 'z_coord']].values
     protein_atoms = pdb_df.df['ATOM']['atom_name'].tolist()
@@ -132,7 +132,7 @@ def process_pocket_pdb(pdb_path, ligand_path, output_lmdb_path, pocket_name="dem
                         pdb_df.df['ATOM']['residue_number'].astype(str)).tolist()
     protein_residue_types = pdb_df.df['ATOM']['residue_name'].tolist()
     
-    # Read reference ligand to define pocket
+    # 读取参考配体以定义口袋
     if ligand_path.endswith('.mol2'):
         mol2_df = PandasMol2().read_mol2(ligand_path)
         ligand_coords = mol2_df.df[['x', 'y', 'z']].values
@@ -140,9 +140,9 @@ def process_pocket_pdb(pdb_path, ligand_path, output_lmdb_path, pocket_name="dem
         mol = next(Chem.SDMolSupplier(ligand_path))
         ligand_coords = mol.GetConformer().GetPositions()
     else:
-        raise ValueError("Ligand must be .mol2 or .sdf format")
+        raise ValueError("配体必须是 .mol2 或 .sdf 格式")
     
-    # Find pocket residues within radius of ligand
+    # 查找配体半径范围内的口袋残基
     pocket_residues = set()
     for p_coord, res_name in zip(protein_coords, protein_residues):
         for l_coord in ligand_coords:
@@ -150,7 +150,7 @@ def process_pocket_pdb(pdb_path, ligand_path, output_lmdb_path, pocket_name="dem
                 pocket_residues.add(res_name)
                 break
     
-    # Extract pocket atoms
+    # 提取口袋原子
     pocket_indices = [i for i, r in enumerate(protein_residues) if r in pocket_residues]
     pocket_data = {
         'pocket': pocket_name,
@@ -162,10 +162,10 @@ def process_pocket_pdb(pdb_path, ligand_path, output_lmdb_path, pocket_name="dem
     }
     
     write_lmdb([pocket_data], output_lmdb_path)
-    print(f"Extracted pocket with {len(pocket_indices)} atoms to {output_lmdb_path}")
+    print(f"已提取包含 {len(pocket_indices)} 个原子的口袋到 {output_lmdb_path}")
 
 def write_lmdb(data, lmdb_path):
-    """Write data to LMDB format."""
+    """将数据写入 LMDB 格式。"""
     if os.path.exists(lmdb_path):
         os.remove(lmdb_path)
     
@@ -178,18 +178,18 @@ def write_lmdb(data, lmdb_path):
     
     env.close()
 
-# Example usage for CASP16:
+# CASP16 使用示例：
 if __name__ == "__main__":
-    # Process a CASP16 target
-    target_name = "T0001"  # Replace with actual target name
+    # 处理一个 CASP16 目标
+    target_name = "T0001"  # 替换为实际目标名称
     
-    # 1. Convert ligands
+    # 1. 转换配体
     process_ligand_sdf(
         f"casp16_data/{target_name}/ligands.sdf",
         f"processed/{target_name}_lig.lmdb"
     )
     
-    # 2. Extract pocket
+    # 2. 提取口袋
     process_pocket_pdb(
         f"casp16_data/{target_name}/protein.pdb",
         f"casp16_data/{target_name}/crystal_ligand.mol2",
@@ -198,42 +198,42 @@ if __name__ == "__main__":
     )
 ```
 
-## Step 4: Run LigUnity Inference
+## 第四步：运行 LigUnity 推理
 
-### Option A: Using Demo Mode (Single Target)
+### 方式 A：使用演示模式（单个目标）
 
-For testing on a single protein-ligand pair:
+用于测试单个蛋白质-配体对：
 
 ```bash
-# Set paths
+# 设置路径
 lig_file="path/to/target_lig.lmdb"
 prot_file="path/to/target.lmdb"
-uniprot="P00000"  # UniProt ID (or placeholder if unknown)
-arch="pocket_ranking"  # or "protein_ranking"
+uniprot="P00000"  # UniProt ID（如未知可使用占位符）
+arch="pocket_ranking"  # 或 "protein_ranking"
 weight_path="path/to/checkpoint.pt"
 results_path="./results/casp16_demo"
 
-# Run inference
+# 运行推理
 bash test_zeroshot_demo.sh $lig_file $prot_file $uniprot $arch $weight_path $results_path
 ```
 
-### Option B: Adding CASP16 as a New Test Task
+### 方式 B：将 CASP16 添加为新的测试任务
 
-For systematic testing, add CASP16 to the test pipeline:
+用于系统性测试，将 CASP16 添加到测试流程：
 
-1. **Create data directory structure:**
+1. **创建数据目录结构：**
 ```
 test_datasets/
 └── CASP16/
-    ├── casp16_labels.json    # Labels file
+    ├── casp16_labels.json    # 标签文件
     └── lmdbs/
-        ├── target1.lmdb      # Pocket data
-        ├── target1_lig.lmdb  # Ligand data
+        ├── target1.lmdb      # 口袋数据
+        ├── target1_lig.lmdb  # 配体数据
         ├── target2.lmdb
         └── target2_lig.lmdb
 ```
 
-2. **Create labels file (`casp16_labels.json`):**
+2. **创建标签文件（`casp16_labels.json`）：**
 ```json
 [
     {
@@ -249,7 +249,7 @@ test_datasets/
 ]
 ```
 
-3. **Add test method to `unimol/tasks/test_task.py`:**
+3. **在 `unimol/tasks/test_task.py` 中添加测试方法：**
 ```python
 def test_casp16(self, model, **kwargs):
     labels_casp16 = json.load(
@@ -264,59 +264,59 @@ def test_casp16(self, model, **kwargs):
             rho = self.test_casp16_target(target, model, ligands_dict[target])
         rho_list.append(rho)
     
-    print(f"CASP16 Mean R²: {np.mean(rho_list)}")
+    print(f"CASP16 平均 R²: {np.mean(rho_list)}")
 
 def test_casp16_target(self, target, model, label_info, **kwargs):
-    # Similar to test_fep_target()
+    # 类似于 test_fep_target()
     data_path = f"{self.args.data}/CASP16/lmdbs/{target}_lig.lmdb"
     mol_dataset = self.load_mols_dataset(data_path, "atoms", "coordinates")
-    # ... rest of the inference code
+    # ... 其余推理代码
 ```
 
-4. **Add to `unimol/test.py`:**
+4. **在 `unimol/test.py` 中添加：**
 ```python
 elif args.test_task == "CASP16":
     task.test_casp16(model)
 ```
 
-5. **Run the test:**
+5. **运行测试：**
 ```bash
 bash test.sh CASP16 pocket_ranking ${weight_path} ./results/casp16
 ```
 
-## Step 5: Analyze Results
+## 第五步：分析结果
 
-After inference, results are saved as numpy files:
+推理完成后，结果保存为 numpy 文件：
 
 ```python
 import numpy as np
 import json
 
-# Load results
+# 加载结果
 mol_embeds = np.load("results/saved_mols_embed.npy")
 pocket_embeds = np.load("results/saved_target_embed.npy")
 smis = json.load(open("results/saved_smis.json"))
 
-# Compute affinity scores (cosine similarity)
+# 计算亲和力分数（余弦相似度）
 scores = pocket_embeds @ mol_embeds.T
-affinity_scores = scores.max(axis=0)  # Max over pocket conformations
+affinity_scores = scores.max(axis=0)  # 取口袋构象的最大值
 
-# Rank ligands by predicted affinity
+# 按预测亲和力对配体排序
 ranked_indices = np.argsort(affinity_scores)[::-1]
 for i in ranked_indices[:10]:
-    print(f"Rank {i+1}: {smis[i]} (score: {affinity_scores[i]:.4f})")
+    print(f"排名 {i+1}: {smis[i]} (分数: {affinity_scores[i]:.4f})")
 ```
 
-### Computing Metrics
+### 计算评估指标
 
-If you have ground truth activities:
+如果有真实活性值：
 ```python
 from scipy import stats
 
-# Load ground truth
+# 加载真实值
 true_activities = [label["act"] for label in labels_data["ligands"]]
 
-# Compute correlation
+# 计算相关性
 pearson_r = stats.pearsonr(true_activities, affinity_scores).statistic
 spearman_r = stats.spearmanr(true_activities, affinity_scores).statistic
 
@@ -325,33 +325,33 @@ print(f"Spearman R: {spearman_r:.4f}")
 print(f"R²: {max(pearson_r, 0)**2:.4f}")
 ```
 
-## Tips for CASP16
+## CASP16 使用技巧
 
-1. **Get UniProt IDs**: Use UniProt's mapping service to find UniProt IDs for CASP16 targets
-2. **Pocket definition**: If no reference ligand is provided, use binding site prediction tools
-3. **Sequence retrieval**: Sequences can be fetched automatically using the `get_uniprot_seq()` function
-4. **Ensemble predictions**: For best results, use both `pocket_ranking` and `protein_ranking` models and ensemble the results
+1. **获取 UniProt ID**：使用 UniProt 的映射服务查找 CASP16 目标的 UniProt ID
+2. **口袋定义**：如果没有提供参考配体，使用结合位点预测工具
+3. **序列获取**：可以使用 `get_uniprot_seq()` 函数自动获取序列
+4. **集成预测**：为获得最佳结果，同时使用 `pocket_ranking` 和 `protein_ranking` 模型并集成结果
 
-## Troubleshooting
+## 故障排除
 
-### Common Issues
+### 常见问题
 
-1. **"Pocket too large"**: Reduce the `raid` parameter (default: 6Å) or increase `--max-pocket-atoms`
-2. **"Cannot generate conformation"**: Some SMILES may fail; filter out problematic molecules
-3. **"UniProt sequence not found"**: Manually provide the sequence in labels file
+1. **"口袋太大"**：减小 `raid` 参数（默认：6Å）或增加 `--max-pocket-atoms`
+2. **"无法生成构象"**：某些 SMILES 可能失败；过滤掉有问题的分子
+3. **"找不到 UniProt 序列"**：在标签文件中手动提供序列
 
-### Memory Issues
+### 内存问题
 
-For large datasets, process in batches:
+对于大型数据集，分批处理：
 ```bash
-# Split your data and run multiple times
+# 分割数据并多次运行
 for subset in subset1 subset2 subset3; do
     bash test_zeroshot_demo.sh ${subset}_lig.lmdb pocket.lmdb uniprot arch weight ./results/${subset}
 done
 ```
 
-## References
+## 参考资料
 
-- CASP16 Pharma Ligands: https://predictioncenter.org/download_area/CASP16/extra_experiments/pharma_ligands/
-- LigUnity Paper: https://doi.org/10.1016/j.patter.2025.101371
-- LigUnity Checkpoints: https://huggingface.co/fengb/LigUnity_pocket_ranking
+- CASP16 药物配体：https://predictioncenter.org/download_area/CASP16/extra_experiments/pharma_ligands/
+- LigUnity 论文：https://doi.org/10.1016/j.patter.2025.101371
+- LigUnity 模型权重：https://huggingface.co/fengb/LigUnity_pocket_ranking
