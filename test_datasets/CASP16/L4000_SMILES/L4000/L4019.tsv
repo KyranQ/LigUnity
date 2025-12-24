@@ -1,0 +1,5 @@
+ID	Name	SMILES	Task
+0	LIG	N=Cc1cc(Oc2ccc(I)cc2)ncn1	P
+1	DMS	CS(C)=O	P
+2	LIG	N=Cc1cc(Oc2ccc(I)cc2)ncn1	P
+3	DMS	CS(C)=O	P

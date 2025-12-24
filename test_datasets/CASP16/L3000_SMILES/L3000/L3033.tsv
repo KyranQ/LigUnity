@@ -1,0 +1,3 @@
+ID	Name	SMILES	Task
+0	L0R	Cc1cc(OCc2n[nH]c(=O)n2C(C)C)c(C(C)(C)C)cc1C#N	P
+1	SO4	O=S(=O)([O-])[O-]	P

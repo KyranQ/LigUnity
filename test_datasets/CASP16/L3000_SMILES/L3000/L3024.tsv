@@ -1,0 +1,3 @@
+ID	Name	SMILES	Task
+0	DRG	CNC(=O)C[C@H](NC(=O)COc1c(CN2CC(F)(F)C2)cccc1OC)c1cccc(Br)c1	PA
+1	BR	[Br-]	PA

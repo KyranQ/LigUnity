@@ -1,0 +1,7 @@
+ID	Name	SMILES	Task
+0	LIG	[NH3+]Cc1ncn(Cc2nc3cc(Cl)ccc3n2Cc2ccccc2)n1	P
+1	DMS	CS(C)=O	P
+2	EDO	OCCO	P
+3	DMS	CS(C)=O	P
+4	LIG	[NH3+]Cc1ncn(Cc2nc3cc(Cl)ccc3n2Cc2ccccc2)n1	P
+5	DMS	CS(C)=O	P

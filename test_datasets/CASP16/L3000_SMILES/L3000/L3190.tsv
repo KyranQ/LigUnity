@@ -1,0 +1,3 @@
+ID	Name	SMILES	Task
+0	L0R	CCOC(=O)c1cc(-c2cccc(Br)c2)[nH]n1	PA
+1	BR	[Br-]	PA

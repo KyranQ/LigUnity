@@ -1,0 +1,3 @@
+ID	Name	SMILES	Task
+0	L0R	CC(C)c1cc(CNc2ncc(C(=O)N3CCC34CN(S(C)(=O)=O)C4)cn2)cc(OC(F)(F)F)c1	P
+1	ACT	CC(=O)[O-]	P
