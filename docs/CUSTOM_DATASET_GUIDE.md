@@ -2,6 +2,49 @@
 
 本指南说明如何在自定义数据集上测试 LigUnity 的亲和力预测能力，以 CASP16 数据集为例。
 
+## 快速开始：处理已上传的 CASP16 数据集
+
+如果您已经将 CASP16 数据上传到 `test_datasets/CASP16` 目录，请按以下步骤操作：
+
+### 步骤 1：运行数据处理脚本
+
+```bash
+# 处理所有 CASP16 目标
+python py_scripts/process_casp16.py --casp16_dir test_datasets/CASP16 --output_dir test_datasets/CASP16/lmdbs
+
+# 或者只处理特定系列
+python py_scripts/process_casp16.py --casp16_dir test_datasets/CASP16 --output_dir test_datasets/CASP16/lmdbs --series L1000 L3000
+```
+
+这将：
+- 读取 `L1000_exper_struct/`, `L2000_exper_struct/` 等目录中的蛋白质和配体 PDB 文件
+- 读取 `L1000_SMILES/`, `L2000_SMILES/` 等目录中的 SMILES 文件
+- 读取 `L1000_exper_affinity.csv`, `L3000_exper_affinity.csv` 中的活性数据
+- 生成 LMDB 格式的口袋和配体文件
+- 创建 `casp16_labels.json` 标签文件
+
+### 步骤 2：运行 LigUnity Zero-Shot 推理
+
+```bash
+# 设置模型权重路径
+weight_path="path/to/checkpoint.pt"  # 从 HuggingFace 下载
+
+# 运行 CASP16 测试
+bash test.sh CASP16 pocket_ranking ${weight_path} ./results/casp16
+```
+
+### 步骤 3：查看结果
+
+结果保存在 `./results/casp16/CASP16/{target}/` 目录下：
+- `saved_mols_embed.npy`: 分子嵌入
+- `saved_target_embed.npy`: 口袋嵌入
+- `saved_labels.npy`: 真实活性值
+- `saved_smis.json`: SMILES 列表
+
+---
+
+## 详细说明
+
 ## 概述
 
 要在新数据集（如 CASP16）上测试 LigUnity，您需要：
@@ -15,10 +58,37 @@
 从以下链接下载 CASP16 药物配体数据集：
 https://predictioncenter.org/download_area/CASP16/extra_experiments/pharma_ligands/
 
-CASP16 数据集通常包括：
+CASP16 数据集包括：
 - 蛋白质结构（PDB 格式）
-- 配体结构（SDF/MOL2 格式）
-- 结合位点信息
+- 配体结构（PDB 格式）
+- SMILES 文件（TSV 格式）
+- 活性数据（CSV 格式）
+
+## CASP16 数据集结构
+
+```
+test_datasets/CASP16/
+├── L1000_exper_affinity.csv         # L1000 系列活性数据
+├── L3000_exper_affinity.csv         # L3000 系列活性数据
+├── L1000_SMILES/                    # L1000 系列 SMILES
+│   ├── L1001.tsv
+│   ├── L1002.tsv
+│   └── ...
+├── L1000_exper_struct/              # L1000 系列结构
+│   ├── L1001/
+│   │   └── L1000_prepared/
+│   │       └── L1001/
+│   │           ├── protein_aligned.pdb  # 蛋白质结构
+│   │           └── ligand_*.pdb         # 配体结构
+│   ├── L1002/
+│   └── ...
+├── L2000_SMILES/
+├── L2000_exper_struct/
+├── L3000_SMILES/
+├── L3000_exper_struct/
+├── L4000_SMILES/
+└── L4000_exper_struct/
+```
 
 ## 第二步：准备数据
 

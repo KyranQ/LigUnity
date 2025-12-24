@@ -86,13 +86,16 @@ def main(args):
             task.test_dekois(model)
             task.test_pcba(model)
 
+        elif args.test_task == "CASP16":
+            task.test_casp16(model)
+
 
 def cli_main():
     # add args
 
     parser = options.get_validation_parser()
     parser.add_argument("--test-task", type=str, default="DUDE", help="test task",
-                        choices=["DUDE", "PCBA", "CASF", "PDB", "FEP", "BDB", "DEKOIS", "ALL", "DEMO"])
+                        choices=["DUDE", "PCBA", "CASF", "PDB", "FEP", "BDB", "DEKOIS", "ALL", "DEMO", "CASP16"])
     options.add_model_args(parser)
     args = options.parse_args_and_arch(parser)
 
