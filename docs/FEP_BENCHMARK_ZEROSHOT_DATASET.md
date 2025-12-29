@@ -1,19 +1,19 @@
-# FEP Benchmark Zero-Shot Dataset Documentation
+# FEP 基准 Zero-Shot 数据集文档
 
-This document explains where the FEP benchmark zero-shot dataset is called in LigUnity's code, how the data is loaded, and the format of the zero-shot dataset.
+本文档说明 FEP 基准 zero-shot 数据集在 LigUnity 代码中的调用位置、数据加载方式以及数据集格式。
 
-## 1. Where is the FEP benchmark zero-shot dataset called?
+## 1. FEP 基准 zero-shot 数据集在哪里被调用？
 
-The FEP benchmark zero-shot dataset is called through the following code flow:
+FEP 基准 zero-shot 数据集通过以下代码流程被调用：
 
-### Entry Point: `test.sh`
+### 入口点：`test.sh`
 
-When you run:
+运行以下命令时：
 ```bash
 bash test.sh FEP pocket_ranking ${path2weight} ${path2result}
 ```
 
-The script (`test.sh`) invokes:
+脚本 (`test.sh`) 会调用：
 ```bash
 python ./unimol/test.py "./test_datasets" --user-dir ./unimol --valid-subset test \
        --results-path $results_path \
@@ -22,19 +22,19 @@ python ./unimol/test.py "./test_datasets" --user-dir ./unimol --valid-subset tes
        --test-task FEP
 ```
 
-### Main Test Script: `unimol/test.py`
+### 主测试脚本：`unimol/test.py`
 
-In `unimol/test.py` (lines 70-71), the FEP test task is handled:
+在 `unimol/test.py` 中（第 70-71 行），FEP 测试任务的处理：
 ```python
 elif args.test_task == "FEP":
     task.test_fep(model)
 ```
 
-### Task Implementation: `unimol/tasks/test_task.py`
+### 任务实现：`unimol/tasks/test_task.py`
 
-The actual dataset loading and testing happens in `unimol/tasks/test_task.py`:
+实际的数据集加载和测试在 `unimol/tasks/test_task.py` 中进行：
 
-1. **`test_fep()` method** (lines 1203-1217): This is the main entry point for FEP zero-shot testing
+1. **`test_fep()` 方法**（第 1203-1217 行）：FEP zero-shot 测试的主入口
    ```python
    def test_fep(self, model, **kwargs):
        labels_fep = json.load(
@@ -49,206 +49,206 @@ The actual dataset loading and testing happens in `unimol/tasks/test_task.py`:
            rho_list.append(rho)
    ```
 
-2. **`test_fep_target()` method** (lines 1088-1143): Loads ligand and pocket LMDB datasets
+2. **`test_fep_target()` 方法**（第 1088-1143 行）：加载配体和口袋 LMDB 数据集
    ```python
    def test_fep_target(self, target, model, label_info, **kwargs):
-       # Load ligand data
+       # 加载配体数据
        data_path = f"{self.args.data}/FEP/lmdbs/{target}_lig.lmdb"
        mol_dataset = self.load_mols_dataset(data_path, "atoms", "coordinates")
        
-       # Load pocket data
+       # 加载口袋数据
        data_path = f"{self.args.data}/FEP/lmdbs/{target}.lmdb"
        pocket_dataset = self.load_pockets_dataset(data_path)
    ```
 
-## 2. Which part of the code introduces/loads these datasets?
+## 2. 哪部分代码引入/加载这些数据集？
 
-### Dataset Loading Methods
+### 数据集加载方法
 
-The datasets are loaded by these key methods in `unimol/tasks/test_task.py`:
+数据集由 `unimol/tasks/test_task.py` 中的以下关键方法加载：
 
-1. **`load_mols_dataset()`** (lines 361-451): Loads ligand/molecule data from LMDB files
-   - Reads atoms, coordinates, and SMILES from LMDB
-   - Processes molecules by removing hydrogens and normalizing coordinates
-   - Returns a nested dataset structure with:
-     - `net_input`: molecular tokens, distances, edge types
-     - `smi_name`: SMILES strings
-     - `mol_len`: molecule lengths
+1. **`load_mols_dataset()`**（第 361-451 行）：从 LMDB 文件加载配体/分子数据
+   - 从 LMDB 读取原子、坐标和 SMILES
+   - 通过移除氢原子和归一化坐标来处理分子
+   - 返回包含以下内容的嵌套数据集结构：
+     - `net_input`：分子 token、距离、边类型
+     - `smi_name`：SMILES 字符串
+     - `mol_len`：分子长度
 
-2. **`load_pockets_dataset()`** (lines 453-537): Loads pocket data from LMDB files
-   - Reads pocket atoms and coordinates from LMDB
-   - Crops pockets to `max_pocket_atoms`
-   - Returns a nested dataset structure with:
-     - `net_input`: pocket tokens, distances, edge types, coordinates
-     - `pocket_name`: pocket identifiers
-     - `pocket_len`: pocket lengths
+2. **`load_pockets_dataset()`**（第 453-537 行）：从 LMDB 文件加载口袋数据
+   - 从 LMDB 读取口袋原子和坐标
+   - 将口袋裁剪到 `max_pocket_atoms`
+   - 返回包含以下内容的嵌套数据集结构：
+     - `net_input`：口袋 token、距离、边类型、坐标
+     - `pocket_name`：口袋标识符
+     - `pocket_len`：口袋长度
 
-### Label Loading
+### 标签加载
 
-Labels and sequence information are loaded from JSON files:
-- **`test_datasets/FEP/fep_labels.json`**: Contains all FEP target information (sequences, ligands, activities)
+标签和序列信息从 JSON 文件加载：
+- **`test_datasets/FEP/fep_labels.json`**：包含所有 FEP 目标信息（序列、配体、活性）
 
-## 3. FEP Zero-Shot Dataset Format
+## 3. FEP Zero-Shot 数据集格式
 
-### Directory Structure
+### 目录结构
 
 ```
 test_datasets/
 ├── FEP/
-│   ├── fep_labels.json           # Labels and sequences for all targets
-│   ├── FEP_sequence.csv          # Protein sequences
-│   ├── ligands.lmdb              # All ligands in LMDB format
-│   ├── proteins.lmdb             # All proteins in LMDB format
-│   └── lmdbs/                    # Per-target LMDB files
-│       ├── tnks2.lmdb            # Pocket data for TNKS2 target
-│       ├── tnks2_lig.lmdb        # Ligand data for TNKS2 target
-│       ├── p38.lmdb              # Pocket data for P38 target
-│       ├── p38_lig.lmdb          # Ligand data for P38 target
-│       └── ... (other targets)
-└── FEP.json                      # FEP target metadata
+│   ├── fep_labels.json           # 所有目标的标签和序列
+│   ├── FEP_sequence.csv          # 蛋白质序列
+│   ├── ligands.lmdb              # LMDB 格式的所有配体
+│   ├── proteins.lmdb             # LMDB 格式的所有蛋白质
+│   └── lmdbs/                    # 按目标分类的 LMDB 文件
+│       ├── tnks2.lmdb            # TNKS2 目标的口袋数据
+│       ├── tnks2_lig.lmdb        # TNKS2 目标的配体数据
+│       ├── p38.lmdb              # P38 目标的口袋数据
+│       ├── p38_lig.lmdb          # P38 目标的配体数据
+│       └── ...（其他目标）
+└── FEP.json                      # FEP 目标元数据
 ```
 
-### fep_labels.json Format
+### fep_labels.json 格式
 
-This is the main label file containing all FEP benchmark data:
+这是包含所有 FEP 基准数据的主标签文件：
 
 ```json
 [
     {
-        "pockets": ["tnks2"],           // Target pocket name(s)
+        "pockets": ["tnks2"],           // 目标口袋名称
         "uniprot": "Q9H2K2",            // UniProt ID
-        "sequence": "MSGRRCAG...",      // Protein sequence
+        "sequence": "MSGRRCAG...",      // 蛋白质序列
         "ligands": [
             {
-                "act": 6.26874109866682,    // Activity value (pIC50 or similar)
-                "smi": "O=c1[nH]c(-c2ccccc2)nc2ccccc12"  // SMILES string
+                "act": 6.26874109866682,    // 活性值（pIC50 或类似值）
+                "smi": "O=c1[nH]c(-c2ccccc2)nc2ccccc12"  // SMILES 字符串
             },
-            // ... more ligands
+            // ... 更多配体
         ]
     },
-    // ... more targets
+    // ... 更多目标
 ]
 ```
 
-### FEP Targets in the Dataset
+### 数据集中的 FEP 目标
 
-The FEP benchmark includes the following 16 targets:
+FEP 基准包含以下 16 个目标：
 
-| Target | UniProt ID | Description |
-|--------|------------|-------------|
+| 目标 | UniProt ID | 描述 |
+|------|------------|------|
 | tnks2  | Q9H2K2     | Tankyrase 2 |
-| p38    | Q16539     | P38 MAP Kinase |
+| p38    | Q16539     | P38 MAP 激酶 |
 | hif2a  | Q99814     | HIF-2α |
-| mcl1   | Q07820     | MCL1 (apoptosis regulator) |
-| cdk8   | P49336     | Cyclin-Dependent Kinase 8 |
-| cmet   | P08581     | c-Met receptor tyrosine kinase |
-| tyk2   | P29597     | TYK2 kinase |
+| mcl1   | Q07820     | MCL1（凋亡调节因子）|
+| cdk8   | P49336     | 周期蛋白依赖性激酶 8 |
+| cmet   | P08581     | c-Met 受体酪氨酸激酶 |
+| tyk2   | P29597     | TYK2 激酶 |
 | pfkfb3 | Q16875     | PFKFB3 |
-| cdk2   | P24941     | Cyclin-Dependent Kinase 2 |
-| ptp1b  | P18031     | Protein Tyrosine Phosphatase 1B |
-| jnk1   | P45983     | JNK1 kinase |
-| shp2   | Q06124     | SHP2 phosphatase |
-| bace   | P56817     | BACE1 (beta-secretase) |
-| syk    | P43405     | SYK kinase |
-| thrombin | P00734   | Thrombin |
-| eg5    | P52732     | Kinesin-like protein EG5 |
+| cdk2   | P24941     | 周期蛋白依赖性激酶 2 |
+| ptp1b  | P18031     | 蛋白酪氨酸磷酸酶 1B |
+| jnk1   | P45983     | JNK1 激酶 |
+| shp2   | Q06124     | SHP2 磷酸酶 |
+| bace   | P56817     | BACE1（β-分泌酶）|
+| syk    | P43405     | SYK 激酶 |
+| thrombin | P00734   | 凝血酶 |
+| eg5    | P52732     | 驱动蛋白 EG5 |
 
-### LMDB File Format
+### LMDB 文件格式
 
-The LMDB files contain molecular and pocket structure data. The data is processed through specialized dataset classes (`AffinityMolDataset`, `AffinityPocketDataset`) that handle the data transformation.
+LMDB 文件包含分子和口袋结构数据。数据通过专门的数据集类（`AffinityMolDataset`、`AffinityPocketDataset`）进行处理和转换。
 
-#### Ligand LMDB (e.g., `tnks2_lig.lmdb`)
-Each entry contains the following raw data:
-- `atoms`: List of atom types (e.g., `["C", "N", "O", ...]`)
-- `coordinates`: 3D coordinates as numpy array `(N_atoms, 3)`
-- `smi`: SMILES string
-- `label`: Activity value (optional, may not be present in all datasets)
+#### 配体 LMDB（例如 `tnks2_lig.lmdb`）
+每个条目包含以下原始数据：
+- `atoms`：原子类型列表（例如 `["C", "N", "O", ...]`）
+- `coordinates`：3D 坐标，numpy 数组 `(N_atoms, 3)`
+- `smi`：SMILES 字符串
+- `label`：活性值（可选，可能不存在于所有数据集中）
 
-The code loads this through `load_mols_dataset()` which:
-1. Creates an `AffinityMolDataset` wrapper
-2. Removes hydrogen atoms
-3. Normalizes coordinates
-4. Tokenizes atom types
-5. Computes distance matrices and edge types
+代码通过 `load_mols_dataset()` 加载，该方法：
+1. 创建 `AffinityMolDataset` 包装器
+2. 移除氢原子
+3. 归一化坐标
+4. 对原子类型进行 token 化
+5. 计算距离矩阵和边类型
 
-#### Pocket LMDB (e.g., `tnks2.lmdb`)
-Each entry contains:
-- `pocket_atoms`: List of residue-atom types (e.g., `["CA", "CB", "N", ...]`)
-- `pocket_coordinates`: 3D coordinates as numpy array `(N_atoms, 3)`
-- `pocket`: Pocket identifier
-- `pocket_residue_name`: Residue names (optional)
+#### 口袋 LMDB（例如 `tnks2.lmdb`）
+每个条目包含：
+- `pocket_atoms`：残基-原子类型列表（例如 `["CA", "CB", "N", ...]`）
+- `pocket_coordinates`：3D 坐标，numpy 数组 `(N_atoms, 3)`
+- `pocket`：口袋标识符
+- `pocket_residue_name`：残基名称（可选）
 
-The code loads this through `load_pockets_dataset()` which:
-1. Creates an `AffinityPocketDataset` wrapper
-2. Removes hydrogen atoms
-3. Crops pocket to `max_pocket_atoms` (default 511)
-4. Normalizes coordinates
-5. Tokenizes residue-atom types
-6. Computes distance matrices and edge types
+代码通过 `load_pockets_dataset()` 加载，该方法：
+1. 创建 `AffinityPocketDataset` 包装器
+2. 移除氢原子
+3. 将口袋裁剪到 `max_pocket_atoms`（默认 511）
+4. 归一化坐标
+5. 对残基-原子类型进行 token 化
+6. 计算距离矩阵和边类型
 
-### How to View the Dataset Format
+### 如何查看数据集格式
 
-#### Option 1: View JSON labels directly
+#### 方法 1：直接查看 JSON 标签
 ```python
 import json
 
-# Load FEP labels
+# 加载 FEP 标签
 with open("test_datasets/FEP/fep_labels.json") as f:
     fep_labels = json.load(f)
 
-# Print first target info
+# 打印第一个目标的信息
 target = fep_labels[0]
-print(f"Target: {target['pockets']}")
+print(f"目标: {target['pockets']}")
 print(f"UniProt: {target['uniprot']}")
-print(f"Sequence length: {len(target['sequence'])}")
-print(f"Number of ligands: {len(target['ligands'])}")
-print(f"First ligand: {target['ligands'][0]}")
+print(f"序列长度: {len(target['sequence'])}")
+print(f"配体数量: {len(target['ligands'])}")
+print(f"第一个配体: {target['ligands'][0]}")
 ```
 
-#### Option 2: View LMDB data
+#### 方法 2：查看 LMDB 数据
 ```python
 from unicore.data import LMDBDataset
 
-# Load ligand dataset
+# 加载配体数据集
 lig_dataset = LMDBDataset("test_datasets/FEP/lmdbs/tnks2_lig.lmdb")
-print(f"Number of ligands: {len(lig_dataset)}")
-print(f"First ligand keys: {lig_dataset[0].keys()}")
-print(f"First ligand SMILES: {lig_dataset[0]['smi']}")
+print(f"配体数量: {len(lig_dataset)}")
+print(f"第一个配体的键: {lig_dataset[0].keys()}")
+print(f"第一个配体的 SMILES: {lig_dataset[0]['smi']}")
 
-# Load pocket dataset
+# 加载口袋数据集
 pocket_dataset = LMDBDataset("test_datasets/FEP/lmdbs/tnks2.lmdb")
-print(f"Number of pockets: {len(pocket_dataset)}")
-print(f"First pocket keys: {pocket_dataset[0].keys()}")
+print(f"口袋数量: {len(pocket_dataset)}")
+print(f"第一个口袋的键: {pocket_dataset[0].keys()}")
 ```
 
-## 4. Code Flow Summary
+## 4. 代码流程总结
 
 ```
-test.sh (FEP task)
+test.sh（FEP 任务）
     └── unimol/test.py::main()
             └── test_task.test_fep(model)
-                    ├── Load labels: test_datasets/FEP/fep_labels.json
-                    └── For each target:
+                    ├── 加载标签：test_datasets/FEP/fep_labels.json
+                    └── 对于每个目标：
                             ├── test_fep_target(target, model, label_info)
                             │       ├── load_mols_dataset(FEP/lmdbs/{target}_lig.lmdb)
                             │       ├── load_pockets_dataset(FEP/lmdbs/{target}.lmdb)
-                            │       ├── Compute molecule embeddings
-                            │       ├── Compute pocket embeddings with sequence
-                            │       └── Calculate correlation (R²)
-                            └── Report mean/median R² across all targets
+                            │       ├── 计算分子嵌入
+                            │       ├── 使用序列计算口袋嵌入
+                            │       └── 计算相关性（R²）
+                            └── 报告所有目标的平均/中位数 R²
 ```
 
-## 5. Result Processing
+## 5. 结果处理
 
-After running zero-shot FEP tests, results are saved to:
-- `{results_path}/FEP/{target}/saved_mols_embed.npy` - Molecule embeddings
-- `{results_path}/FEP/{target}/saved_target_embed.npy` - Pocket embeddings
-- `{results_path}/FEP/{target}/saved_labels.npy` - True activity values
-- `{results_path}/FEP/{target}/saved_smis.json` - SMILES strings
+运行 zero-shot FEP 测试后，结果保存到：
+- `{results_path}/FEP/{target}/saved_mols_embed.npy` - 分子嵌入
+- `{results_path}/FEP/{target}/saved_target_embed.npy` - 口袋嵌入
+- `{results_path}/FEP/{target}/saved_labels.npy` - 真实活性值
+- `{results_path}/FEP/{target}/saved_smis.json` - SMILES 字符串
 
-The final ensemble results are computed using `ensemble_result.py`:
+最终集成结果使用 `ensemble_result.py` 计算：
 ```bash
 python ensemble_result.py zeroshot FEP
 ```
 
-This combines predictions from pocket and protein ranking models to produce the final metrics.
+这会将 pocket ranking 和 protein ranking 模型的预测结果组合以产生最终指标。

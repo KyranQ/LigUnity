@@ -2,6 +2,181 @@
 
 本指南说明如何在自定义数据集上测试 LigUnity 的亲和力预测能力，以 CASP16 数据集为例。
 
+---
+
+## 🚀 专门针对 L1000 和 L3000 系列的详细步骤指南
+
+如果您只需要使用 CASP16 的 **L1000** 和 **L3000** 系列进行亲和力预测，请按以下步骤操作：
+
+### 前提条件
+
+确保您已安装以下依赖：
+```bash
+pip install lmdb rdkit biopandas pandas numpy scipy
+```
+
+### 第 1 步：确认数据已上传
+
+确保您的 CASP16 数据位于 `test_datasets/CASP16/` 目录下，结构如下：
+```
+test_datasets/CASP16/
+├── L1000_exper_affinity.csv      # L1000 活性数据（包含 binding_affinity 列）
+├── L3000_exper_affinity.csv      # L3000 活性数据
+├── L1000_SMILES/                 # L1000 系列的 SMILES 文件
+│   ├── L1001.tsv
+│   ├── L1002.tsv
+│   └── ...
+├── L3000_SMILES/                 # L3000 系列的 SMILES 文件
+│   ├── L3001.tsv
+│   └── ...
+├── L1000_exper_struct/           # L1000 系列的结构文件
+│   ├── L1001/
+│   │   └── L1000_prepared/
+│   │       └── L1001/
+│   │           ├── protein_aligned.pdb
+│   │           └── ligand_*.pdb
+│   └── ...
+└── L3000_exper_struct/           # L3000 系列的结构文件
+    └── ...
+```
+
+### 第 2 步：运行数据处理脚本（只处理 L1000 和 L3000）
+
+在 LigUnity 根目录下运行：
+
+```bash
+# 只处理 L1000 和 L3000 系列
+python py_scripts/process_casp16.py \
+    --casp16_dir test_datasets/CASP16 \
+    --output_dir test_datasets/CASP16/lmdbs \
+    --series L1000 L3000
+```
+
+**此命令会：**
+1. 读取 `L1000_exper_struct/` 和 `L3000_exper_struct/` 中的蛋白质和配体 PDB 文件
+2. 读取 `L1000_SMILES/` 和 `L3000_SMILES/` 中的 SMILES 文件
+3. 读取 `L1000_exper_affinity.csv` 和 `L3000_exper_affinity.csv` 中的活性数据
+4. 在 `test_datasets/CASP16/lmdbs/` 目录下生成：
+   - 每个目标的口袋 LMDB 文件（例如 `L1001.lmdb`）
+   - 每个目标的配体 LMDB 文件（例如 `L1001_lig.lmdb`）
+   - 标签文件 `casp16_labels.json`
+
+**验证生成的文件：**
+```bash
+ls -la test_datasets/CASP16/lmdbs/
+
+# 应该看到类似：
+# L1001.lmdb
+# L1001_lig.lmdb
+# L1002.lmdb
+# L1002_lig.lmdb
+# ...
+# L3001.lmdb
+# L3001_lig.lmdb
+# ...
+# casp16_labels.json
+```
+
+### 第 3 步：下载模型权重
+
+从 HuggingFace 下载 LigUnity 模型权重：
+```bash
+# 方法 1：使用 wget（推荐）
+wget https://huggingface.co/fengb/LigUnity_pocket_ranking/resolve/main/checkpoint.pt -O ./checkpoint_pocket.pt
+
+# 方法 2：使用 huggingface-cli
+pip install huggingface_hub
+huggingface-cli download fengb/LigUnity_pocket_ranking checkpoint.pt --local-dir ./
+# 下载后文件位于 ./checkpoint.pt，需要重命名
+mv ./checkpoint.pt ./checkpoint_pocket.pt
+```
+
+### 第 4 步：运行 LigUnity Zero-Shot 推理
+
+```bash
+# 设置模型权重路径（确保路径与上一步下载的位置一致）
+weight_path="./checkpoint_pocket.pt"
+
+# 运行 CASP16 测试
+bash test.sh CASP16 pocket_ranking ${weight_path} ./results/casp16
+```
+
+**预期输出：**
+```
+处理目标 L1001...
+  L1001: R² = 0.xxxx
+处理目标 L1002...
+  L1002: R² = 0.xxxx
+...
+CASP16 结果: Mean R² = 0.xxxx, Median R² = 0.xxxx
+```
+
+### 第 5 步：查看和分析结果
+
+结果保存在 `./results/casp16/CASP16/{target}/` 目录下。
+
+**使用 Python 分析结果：**
+
+```python
+import numpy as np
+import json
+from scipy import stats
+import os
+
+# 设置结果路径
+results_base = "./results/casp16/CASP16"
+
+# 遍历所有目标
+targets = [d for d in os.listdir(results_base) if os.path.isdir(os.path.join(results_base, d))]
+
+all_results = []
+for target in sorted(targets):
+    target_dir = os.path.join(results_base, target)
+    
+    # 加载数据
+    mol_embeds = np.load(os.path.join(target_dir, "saved_mols_embed.npy"))
+    pocket_embeds = np.load(os.path.join(target_dir, "saved_target_embed.npy"))
+    labels = np.load(os.path.join(target_dir, "saved_labels.npy"))
+    with open(os.path.join(target_dir, "saved_smis.json")) as f:
+        smiles = json.load(f)
+    
+    # 计算预测分数
+    scores = pocket_embeds @ mol_embeds.T
+    pred_scores = scores.max(axis=0)
+    
+    # 计算相关性
+    pearson_r = stats.pearsonr(labels, pred_scores).statistic
+    spearman_r = stats.spearmanr(labels, pred_scores).statistic
+    r2 = max(pearson_r, 0) ** 2
+    
+    print(f"{target}: Pearson R = {pearson_r:.4f}, Spearman R = {spearman_r:.4f}, R² = {r2:.4f}")
+    all_results.append({'target': target, 'pearson': pearson_r, 'spearman': spearman_r, 'r2': r2})
+
+# 汇总统计
+print(f"\n===== 汇总 =====")
+print(f"目标总数: {len(all_results)}")
+print(f"平均 Pearson R: {np.mean([r['pearson'] for r in all_results]):.4f}")
+print(f"平均 Spearman R: {np.mean([r['spearman'] for r in all_results]):.4f}")
+print(f"平均 R²: {np.mean([r['r2'] for r in all_results]):.4f}")
+```
+
+### 第 6 步（可选）：使用集成模型提高性能
+
+为获得最佳结果，可以同时使用 pocket_ranking 和 protein_ranking 模型：
+
+```bash
+# 下载 protein_ranking 模型
+wget https://huggingface.co/fengb/LigUnity_protein_ranking/resolve/main/checkpoint.pt -O checkpoint_protein.pt
+
+# 运行 protein_ranking 模型
+bash test.sh CASP16 protein_ranking ./checkpoint_protein.pt ./results/casp16_protein
+
+# 集成两个模型的结果
+python ensemble_result.py zeroshot CASP16
+```
+
+---
+
 ## 快速开始：处理已上传的 CASP16 数据集
 
 如果您已经将 CASP16 数据上传到 `test_datasets/CASP16` 目录，请按以下步骤操作：
