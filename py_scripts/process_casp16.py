@@ -73,6 +73,52 @@ def read_pdb_protein(pdb_path: str) -> Dict:
     }
 
 
+# 标准的三字母到单字母氨基酸映射
+AA_3TO1 = {
+    'ALA': 'A', 'ARG': 'R', 'ASN': 'N', 'ASP': 'D', 'CYS': 'C',
+    'GLN': 'Q', 'GLU': 'E', 'GLY': 'G', 'HIS': 'H', 'ILE': 'I',
+    'LEU': 'L', 'LYS': 'K', 'MET': 'M', 'PHE': 'F', 'PRO': 'P',
+    'SER': 'S', 'THR': 'T', 'TRP': 'W', 'TYR': 'Y', 'VAL': 'V',
+    # 常见修饰残基
+    'MSE': 'M', 'SEC': 'C', 'PYL': 'K', 'SEP': 'S', 'TPO': 'T', 'PTR': 'Y',
+}
+
+
+def extract_sequence_from_pdb(pdb_path: str) -> str:
+    """从 PDB 文件中提取蛋白质序列。
+    
+    Args:
+        pdb_path: PDB 文件路径
+        
+    Returns:
+        单字母氨基酸序列字符串
+    """
+    pdb_df = PandasPdb().read_pdb(pdb_path)
+    
+    # 只使用 CA 原子来避免重复残基
+    ca_atoms = pdb_df.df['ATOM'][pdb_df.df['ATOM']['atom_name'] == 'CA']
+    
+    if len(ca_atoms) == 0:
+        return ""
+    
+    # 按链和残基编号排序
+    ca_atoms = ca_atoms.sort_values(['chain_id', 'residue_number'])
+    
+    # 去重（同一链的同一残基只保留一个）
+    ca_atoms = ca_atoms.drop_duplicates(subset=['chain_id', 'residue_number'])
+    
+    # 转换为单字母序列
+    sequence = ""
+    for _, row in ca_atoms.iterrows():
+        res_name = row['residue_name'].upper()
+        if res_name in AA_3TO1:
+            sequence += AA_3TO1[res_name]
+        else:
+            sequence += 'X'  # 未知残基
+    
+    return sequence
+
+
 def read_pdb_ligand(pdb_path: str) -> np.ndarray:
     """读取 PDB 配体文件并返回坐标。"""
     pdb_df = PandasPdb().read_pdb(pdb_path)
@@ -148,8 +194,34 @@ def write_lmdb(data: List[Dict], lmdb_path: str):
 
 
 def process_casp16_target(target_id: str, casp16_dir: str, output_dir: str, 
-                          affinity_df: pd.DataFrame, smiles_dict: Dict[str, str]):
-    """处理单个 CASP16 目标。"""
+                          affinity_df: pd.DataFrame, smiles_dict: Dict[str, str],
+                          only_with_smiles: bool = False):
+    """处理单个 CASP16 目标。
+    
+    Args:
+        target_id: 目标 ID (如 L3001)
+        casp16_dir: CASP16 数据目录
+        output_dir: 输出目录
+        affinity_df: 活性数据 DataFrame
+        smiles_dict: SMILES 字典
+        only_with_smiles: 如果为 True，只处理有 SMILES 的目标
+        
+    Returns:
+        标签字典或 None
+    """
+    
+    # 如果设置了 only_with_smiles，先检查是否有 SMILES
+    if only_with_smiles:
+        target_row = affinity_df[affinity_df['Target ID'] == target_id]
+        has_smiles_in_csv = False
+        if len(target_row) > 0 and 'ligand_smiles' in target_row.columns:
+            smi_from_csv = target_row['ligand_smiles'].values[0]
+            has_smiles_in_csv = not (smi_from_csv is None or (isinstance(smi_from_csv, float) and pd.isna(smi_from_csv)) or smi_from_csv == "")
+        
+        has_smiles_in_tsv = target_id in smiles_dict
+        
+        if not has_smiles_in_csv and not has_smiles_in_tsv:
+            return None  # 静默跳过没有 SMILES 的目标
     
     # 确定目标所属的系列 (L1000, L2000, L3000, L4000)
     target_num = int(target_id[1:])
@@ -205,6 +277,10 @@ def process_casp16_target(target_id: str, casp16_dir: str, output_dir: str,
     pocket_lmdb_path = os.path.join(output_dir, f"{target_id}.lmdb")
     write_lmdb([pocket_data], pocket_lmdb_path)
     
+    # 从 PDB 文件中提取序列
+    sequence = extract_sequence_from_pdb(protein_pdb)
+    print(f"  序列长度: {len(sequence)}")
+    
     # 获取配体 SMILES
     if target_id in smiles_dict:
         smi = smiles_dict[target_id]
@@ -218,8 +294,9 @@ def process_casp16_target(target_id: str, casp16_dir: str, output_dir: str,
     else:
         print(f"  警告: 找不到目标 {target_id} 的 SMILES")
     
-    # 获取活性值
+    # 获取活性值和其他信息
     target_row = affinity_df[affinity_df['Target ID'] == target_id]
+    proasis_id = ""
     if len(target_row) > 0:
         activity = target_row['binding_affinity'].values[0]
         # 处理可能的 NaN 值：优先使用 affinity CSV 中的 SMILES，如果为空或 NaN 则使用 TSV 文件中的
@@ -228,14 +305,23 @@ def process_casp16_target(target_id: str, casp16_dir: str, output_dir: str,
             smi = smiles_dict.get(target_id, "")
         else:
             smi = smi_from_csv
+        
+        # 获取 Proasis ID（如果存在）
+        if 'Proasis ID' in target_row.columns:
+            proasis_id = str(target_row['Proasis ID'].values[0])
+            if proasis_id == 'nan':
+                proasis_id = ""
     else:
         activity = None
         smi = smiles_dict.get(target_id, "")
     
+    # 使用 Proasis ID 作为 uniprot 字段（如果存在），否则使用 target_id
+    uniprot_id = proasis_id if proasis_id else target_id
+    
     return {
         'pockets': [target_id],
-        'uniprot': target_id,  # CASP16 没有 UniProt ID，使用目标 ID 代替
-        'sequence': "",  # 如果需要序列，可以从 PDB 提取
+        'uniprot': uniprot_id,
+        'sequence': sequence,
         'ligands': [{'act': activity, 'smi': smi}] if activity else [{'act': 0, 'smi': smi}]
     }
 
@@ -318,6 +404,8 @@ def main():
                         help='要处理的目标列表 (例如: L1001 L1002)，不指定则处理所有')
     parser.add_argument('--series', type=str, nargs='+', default=['L1000', 'L2000', 'L3000', 'L4000'],
                         help='要处理的系列 (L1000, L2000, L3000, L4000)')
+    parser.add_argument('--only-with-smiles', action='store_true',
+                        help='只处理有 SMILES 的目标（跳过没有 SMILES 的目标）')
     args = parser.parse_args()
     
     # 创建输出目录
@@ -346,12 +434,16 @@ def main():
     targets = sorted(set(targets))
     print(f"将处理 {len(targets)} 个目标")
     
+    if getattr(args, 'only_with_smiles', False):
+        print("注意: 只处理有 SMILES 的目标")
+    
     # 处理每个目标
     labels = []
     for target_id in targets:
         label = process_casp16_target(
             target_id, args.casp16_dir, args.output_dir, 
-            affinity_df, smiles_dict
+            affinity_df, smiles_dict,
+            only_with_smiles=getattr(args, 'only_with_smiles', False)
         )
         if label:
             labels.append(label)
