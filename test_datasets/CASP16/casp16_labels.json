@@ -1,0 +1,2680 @@
+[
+  {
+    "pockets": [
+      "L1001"
+    ],
+    "uniprot": "L1001",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -12.35477492,
+        "smi": "Fc4cc1c(n(c(c1CN(C)C(=O)OCC)C(=O)O)Cc2c3c(ccc2)cccc3)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1002"
+    ],
+    "uniprot": "L1002",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.57634661,
+        "smi": "[nH]1c5c(c(c1C(c2ccccc2)C3=C(C(CC3=O)c4ccccc4)O)CCNC(=O)C)ccc(c5)CC"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1003"
+    ],
+    "uniprot": "L1003",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.38302145,
+        "smi": "FC(F)(F)c1c(ccc(c1)-c2ccncc2)NS(=O)(=O)c3sc4c(c3C)cc(cc4)F"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1004"
+    ],
+    "uniprot": "L1004",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.7151968,
+        "smi": "Fc4cc1c([nH]c(c1C(C)C)C(c2ccccc2)C3=C(C(NC3=O)C(C)C)O)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1005"
+    ],
+    "uniprot": "L1005",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.44882773,
+        "smi": "Fc4cc1c(n(c(c1CNC(=O)OC)C(=O)O)Cc2c3c(ccc2)cccc3)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1006"
+    ],
+    "uniprot": "L1006",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.06136532,
+        "smi": "[nH]1c5c(c(c1C(c2ccccc2)C3=C(C(C3=O)(C)c4ccc(cc4)C)O)CC(NC(=O)C)(C)C)ccc(c5)C"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1007"
+    ],
+    "uniprot": "L1007",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.115641308,
+        "smi": "OC1=C(C(=O)C1(C)c2ccccc2)C(c3cc4c(cc3)cccc4)c5ccccc5"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1008"
+    ],
+    "uniprot": "L1008",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.781578319,
+        "smi": "s1c5c(c(c1C(c2ccccc2)C3=C(C(C3=O)(C)c4ccccc4)O)C)cc(cc5)C"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1009"
+    ],
+    "uniprot": "L1009",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.35982626,
+        "smi": "Fc5cc1c([nH]c(c1C)[C@H](c2ccccc2)C3=C([C@H](OC3=O)Cc4ccccc4)O)cc5"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1010"
+    ],
+    "uniprot": "L1010",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.57769273,
+        "smi": "Fc1cc2c(cc1)cccc2Cn3c4c(cc3C(=O)O)cccc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1011"
+    ],
+    "uniprot": "L1011",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.14157592,
+        "smi": "Fc4cc1c(n(c(c1CC(=O)N(C)C)C(=O)O)Cc2c3c(ccc2)cccc3)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1012"
+    ],
+    "uniprot": "L1012",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.45276039,
+        "smi": "Fc3cc1c(sc(c1C)S(=O)(=O)Nc2c(cc(cc2)C(=O)OC)S(=O)(=O)C)cc3"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1013"
+    ],
+    "uniprot": "L1013",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.27972411,
+        "smi": "n1(c4c(c(c1C(=O)O)Cc2c3c(ccc2)cccc3)cccc4)CCOC"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1014"
+    ],
+    "uniprot": "L1014",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.17380323,
+        "smi": "n1(c2c(cc1C(=O)O)cccc2)Cc3c4c(ccc3)cccc4C"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1015"
+    ],
+    "uniprot": "L1015",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.44816725,
+        "smi": "Fc4cc1c(sc(c1C)S(=O)(=O)Nc2c(cc(cc2)-c3ccncc3)S(=O)(=O)C)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1016"
+    ],
+    "uniprot": "L1016",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.767072,
+        "smi": "Fc4cc1c(scc1Cn2c3c(c(c2C(=O)O)CC(=O)N(C)C)cccc3)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L1017"
+    ],
+    "uniprot": "L1017",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.86472827,
+        "smi": "Fc4cc1c(n(c(c1CNS(=O)(=O)C)C(=O)O)Cc2c3c(ccc2)cccc3)cc4"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3001"
+    ],
+    "uniprot": "L3001",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.395998582720297,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3002"
+    ],
+    "uniprot": "L3002",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCN(S(=O)(=O)c3ccc(S(N)(=O)=O)cc3)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3003"
+    ],
+    "uniprot": "L3003",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.610211796535024,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3004"
+    ],
+    "uniprot": "L3004",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCC(S(=O)(=O)c3ccc(S(N)(=O)=O)cc3F)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3005"
+    ],
+    "uniprot": "L3005",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCC(CCS(=O)(=O)c3ccc(S(=O)(=O)NCN(C)C)cc3F)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3006"
+    ],
+    "uniprot": "L3006",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "N#Cc1cc(-c2cc(OC3CC3)ccc2F)c(OCc2n[nH]c3ncccc23)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3007"
+    ],
+    "uniprot": "L3007",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cn1c(COc2cc(Cl)c(C#N)cc2-c2cc(OC3CC3)ccc2F)n[nH]c1=O"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3008"
+    ],
+    "uniprot": "L3008",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "N#Cc1cc(-c2cc(OC3CC3)ccc2F)c(OCc2n[nH]c3cnccc23)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3009"
+    ],
+    "uniprot": "L3009",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -12.061860746190218,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3010"
+    ],
+    "uniprot": "L3010",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCC(Sc3ncc(S(N)(=O)=O)cc3F)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3011"
+    ],
+    "uniprot": "L3011",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CCOCC2)nc(C2CC2)c1)N1CC2=C(C1)CN(C(=O)N1CCc3c(O)noc3C1)C2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3012"
+    ],
+    "uniprot": "L3012",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)C1(F)CCN(C(=O)N2CC3=C(CN(C(=O)c4cc(OCC5CCOCC5)nc(C5CC5)c4)C3)C2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3013"
+    ],
+    "uniprot": "L3013",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)C1CCN(C(=O)N2CC3=C(CN(C(=O)c4cc(OCC5CCOCC5)nc(C5CC5)c4)C3)C2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3014"
+    ],
+    "uniprot": "L3014",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CCOCC2)nc(C2CC2)c1)N1CC2=C(C1)CN(C(=O)N1CCn3c(n[nH]c3=O)C1)C2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3017"
+    ],
+    "uniprot": "L3017",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CCOCC2)nc(C2CC2)c1)N1Cc2ccc(C(=O)N3CCc4onc(O)c4C3)cc2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3019"
+    ],
+    "uniprot": "L3019",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.73756811054188,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3021"
+    ],
+    "uniprot": "L3021",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.85408957985962,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3022"
+    ],
+    "uniprot": "L3022",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CCc1ccc(OCc2n[nH]c(=O)n2C)c(Oc2cc(C#N)cc(C3CC3)c2)c1F"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3023"
+    ],
+    "uniprot": "L3023",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCC(CSc3ccc(S(N)(=O)=O)cc3F)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3024"
+    ],
+    "uniprot": "L3024",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.000697653996212,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3025"
+    ],
+    "uniprot": "L3025",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)C1CCN(C(=O)N2C[C@H]3CN(C(=O)OCc4ccc(OC(F)(F)F)cc4)C[C@@H]3C2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3026"
+    ],
+    "uniprot": "L3026",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.148804795301368,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3027"
+    ],
+    "uniprot": "L3027",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.261974880404711,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3028"
+    ],
+    "uniprot": "L3028",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.396681557898605,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3029"
+    ],
+    "uniprot": "L3029",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1ccc2[nH]nnc2c1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3ccc(C4CC4)c(OCC4CC4)n3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3030"
+    ],
+    "uniprot": "L3030",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1ccc2[nH]nnc2c1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3cc(OCC4CC4)c(Cl)cn3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3031"
+    ],
+    "uniprot": "L3031",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3032"
+    ],
+    "uniprot": "L3032",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2n[nH]c3ccccc23)c(C(C)C)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3033"
+    ],
+    "uniprot": "L3033",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2n[nH]c(=O)n2C(C)C)c(C(C)(C)C)cc1C#N"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3034"
+    ],
+    "uniprot": "L3034",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cn1c(COc2ccc(S(C)(=O)=O)cc2C(C)(C)C)n[nH]c1=O"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3035"
+    ],
+    "uniprot": "L3035",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.391943375241993,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3036"
+    ],
+    "uniprot": "L3036",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(C)(C)c1cc(Cl)c(C#N)cc1OCc1n[nH]c2ncccc12"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3037"
+    ],
+    "uniprot": "L3037",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.0956050231655,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3038"
+    ],
+    "uniprot": "L3038",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.027587887117528,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3039"
+    ],
+    "uniprot": "L3039",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.673965291825729,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3040"
+    ],
+    "uniprot": "L3040",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cnc(N[C@@H]2Cc3ccc(Cl)cc3C2)nc1)N1CCC12COC2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3041"
+    ],
+    "uniprot": "L3041",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(C)c1cc(CNc2ncc(C(=O)N3CCC34CN(S(C)(=O)=O)C4)cn2)cc(OC(F)(F)F)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3042"
+    ],
+    "uniprot": "L3042",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.478341062829765,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3043"
+    ],
+    "uniprot": "L3043",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.75800102153713,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3044"
+    ],
+    "uniprot": "L3044",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.702396415713803,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3045"
+    ],
+    "uniprot": "L3045",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.710125018267236,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3046"
+    ],
+    "uniprot": "L3046",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "C[C@]1(O)C[C@]2(CCN2C(=O)c2cnc(N[C@@H]3Cc4ccc(Cl)cc4C3)nc2)C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3047"
+    ],
+    "uniprot": "L3047",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -12.023789251631234,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3048"
+    ],
+    "uniprot": "L3048",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cnc(N[C@H]2Cc3cc(Cl)cc(Cl)c3C2)nc1)N1CCC12COC2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3049"
+    ],
+    "uniprot": "L3049",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.397455591814827,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3050"
+    ],
+    "uniprot": "L3050",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.449214792306218,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3051"
+    ],
+    "uniprot": "L3051",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C1c2cnc(N[C@@H]3Cc4ccc(Cl)cc4C3)nc2CN1C1COC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3052"
+    ],
+    "uniprot": "L3052",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "N#Cc1cc(Cl)cc2c1C[C@@H](Nc1ncc(C(=O)N3CCC34COC4)cn1)C2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3053"
+    ],
+    "uniprot": "L3053",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.672175874781251,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3054"
+    ],
+    "uniprot": "L3054",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.13011050635152,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3055"
+    ],
+    "uniprot": "L3055",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1noc(-c2cnc(N[C@@H]3Cc4ccc(Cl)cc4C3)nc2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3056"
+    ],
+    "uniprot": "L3056",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3057"
+    ],
+    "uniprot": "L3057",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.52611398533033,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3058"
+    ],
+    "uniprot": "L3058",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.389784713877187,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3059"
+    ],
+    "uniprot": "L3059",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1ccc2[nH]nnc2c1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3cc4ccccc4c(OCC(F)(F)F)n3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3060"
+    ],
+    "uniprot": "L3060",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.433904137484914,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3061"
+    ],
+    "uniprot": "L3061",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.043438771589056,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3062"
+    ],
+    "uniprot": "L3062",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nc2cc(OCc3n[nH]c(=O)n3C)c(C3CC3)cc2s1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3063"
+    ],
+    "uniprot": "L3063",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)c1ccc(C(=O)N2C[C@H]3CN(C(=O)OCc4cc(Cl)cc(Cl)c4)C[C@H]3C2)cc1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3064"
+    ],
+    "uniprot": "L3064",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.336821739563579,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3065"
+    ],
+    "uniprot": "L3065",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(OCc1ccc(OC(F)(F)F)cc1)N1C[C@@H]2CN(C(=O)[C@@H]3CCc4[nH]nnc4C3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3066"
+    ],
+    "uniprot": "L3066",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3067"
+    ],
+    "uniprot": "L3067",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "COc1cc(C(=O)N2C[C@@H]3CN(C(=O)c4ccc5[nH]nnc5c4)C[C@H]3C2)cc2ccccc12"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3068"
+    ],
+    "uniprot": "L3068",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3070"
+    ],
+    "uniprot": "L3070",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(OCc1ccc(C(F)(F)F)cc1F)N1CCC2(CC1)CN(C(=O)[C@H]1CCc3[nH]nnc3C1)C2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3071"
+    ],
+    "uniprot": "L3071",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CCn1ccc2c(OC(C)C)cc(C(=O)N3C[C@@H]4[C@H]5CN(C(=O)c6ccc7[nH]nnc7c6)C[C@H]5[C@@H]4C3)cc21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3072"
+    ],
+    "uniprot": "L3072",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(/C=C/c1ccc(OC(F)(F)F)cc1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3073"
+    ],
+    "uniprot": "L3073",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.163481150739706,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3074"
+    ],
+    "uniprot": "L3074",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(/C=C/c1ccc(OC(F)(F)F)cc1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3075"
+    ],
+    "uniprot": "L3075",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.153737711644707,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3076"
+    ],
+    "uniprot": "L3076",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.019598776037837,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3077"
+    ],
+    "uniprot": "L3077",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.454157415578338,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3078"
+    ],
+    "uniprot": "L3078",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "N#Cc1ccc(/C=C/C(=O)N2CC[C@@H]3CN(C(=O)c4ccc5[nH]nnc5c4)C[C@@H]3CC2)cc1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3079"
+    ],
+    "uniprot": "L3079",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.931301545405704,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3080"
+    ],
+    "uniprot": "L3080",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.650440841332946,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3081"
+    ],
+    "uniprot": "L3081",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3082"
+    ],
+    "uniprot": "L3082",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)c1ccc(C(=O)N2C[C@H]3CN(C(=O)OCc4ccc(OC(F)(F)F)cc4)C[C@@H]3C2)cn1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3083"
+    ],
+    "uniprot": "L3083",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.161645722463431,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3084"
+    ],
+    "uniprot": "L3084",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(/C=C/c1ccc(OC(F)(F)F)cc1)N1CC[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3085"
+    ],
+    "uniprot": "L3085",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "N#Cc1cc(Cl)cc(COC(=O)N2C[C@@H]3CN(C(=O)c4ccc5[nH]nnc5c4)C[C@@H]3C2)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3086"
+    ],
+    "uniprot": "L3086",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CS(=O)(=O)c1cc(Cl)cc(COC(=O)N2CC[C@@H]3CN(C(=O)c4ccc5[nH]nnc5c4)C[C@@H]3CC2)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3087"
+    ],
+    "uniprot": "L3087",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.26315372998884,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3088"
+    ],
+    "uniprot": "L3088",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1ccc2cc(Br)ccc2c1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3089"
+    ],
+    "uniprot": "L3089",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(/C=C/c1ccc(OC(F)(F)F)cc1)N1CC[C@@H]2CN(C(=O)[C@@H]3CCc4[nH]nnc4C3)C[C@@H]2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3090"
+    ],
+    "uniprot": "L3090",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.059709424352349,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3093"
+    ],
+    "uniprot": "L3093",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(C)Oc1cc(C(=O)N2C[C@@H]3[C@H]4CN(C(=O)c5ccc6[nH]nnc6c5)C[C@H]4[C@@H]3C2)nc2cc(C(F)(F)F)ccc12"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3095"
+    ],
+    "uniprot": "L3095",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.22147201713899,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3096"
+    ],
+    "uniprot": "L3096",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.42604513023785,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3097"
+    ],
+    "uniprot": "L3097",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2ccc(=O)[nH]n2)c(C(C)C)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3098"
+    ],
+    "uniprot": "L3098",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "COCCOc1cc(C(=O)N2C[C@@H]3[C@H]4CN(C(=O)c5ccc6[nH]nnc6c5)C[C@H]4[C@@H]3C2)nc2ccccc12"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3099"
+    ],
+    "uniprot": "L3099",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.640512810856396,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3100"
+    ],
+    "uniprot": "L3100",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(OCc1cc(Cl)cc(OC(F)(F)F)c1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3101"
+    ],
+    "uniprot": "L3101",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.3416673879581635,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3102"
+    ],
+    "uniprot": "L3102",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(NCc1cnn[nH]1)[C@H]1C[C@@H]2CN(C(=O)OCc3cc(Cl)cc(Cl)c3)C[C@@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3103"
+    ],
+    "uniprot": "L3103",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(C)c1cc2c(cc1OCC(=O)N1CC[C@@H]3CN(C(=O)c4ccc5[nH]nnc5c4)[C@@H]4[C@@H](C1)[C@H]34)C(C)(C)CC2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3105"
+    ],
+    "uniprot": "L3105",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.684791191401301,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3106"
+    ],
+    "uniprot": "L3106",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.967764478836765,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3107"
+    ],
+    "uniprot": "L3107",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(COc1ccc(OC(F)(F)F)cc1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3108"
+    ],
+    "uniprot": "L3108",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1ccc(-c2ccc(Cl)cc2)cc1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3109"
+    ],
+    "uniprot": "L3109",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.908740446763726,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3110"
+    ],
+    "uniprot": "L3110",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CC2)c2ccccc2c1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3111"
+    ],
+    "uniprot": "L3111",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.10317794750321,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3112"
+    ],
+    "uniprot": "L3112",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(CCc1ccc(OC(F)(F)F)cc1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3113"
+    ],
+    "uniprot": "L3113",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(/C=C/c1ccc(OC(F)(F)F)cc1)N1CC[C@@H]2CN(C(=O)N3CCc4[nH]ncc4C3)C[C@@H]2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3114"
+    ],
+    "uniprot": "L3114",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.28020760540887,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3115"
+    ],
+    "uniprot": "L3115",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.036393029131062,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3117"
+    ],
+    "uniprot": "L3117",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(/C=C/c1ccc(OC(F)(F)F)cc1)N1CC[C@@H]2CN(C(=O)N3CCc4[nH]nnc4C3)C[C@@H]2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3118"
+    ],
+    "uniprot": "L3118",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "COc1cc(C(=O)N2C[C@@H]3[C@H](C2)[C@H]2CN(C(=O)c4ccc5[nH]nnc5c4)C[C@@H]32)cc2ccccc12"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3119"
+    ],
+    "uniprot": "L3119",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(OCc1cc(Cl)cc(Cl)c1)N1C[C@H]2CNC[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3120"
+    ],
+    "uniprot": "L3120",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.294876864221976,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3121"
+    ],
+    "uniprot": "L3121",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.35749059899522,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3122"
+    ],
+    "uniprot": "L3122",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cnc(OCC(F)(F)F)c(C2CC2)c1)N1C[C@@H]2[C@H](C1)[C@H]1CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3123"
+    ],
+    "uniprot": "L3123",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CCOc1cc(C#N)ccc1COC(=O)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3124"
+    ],
+    "uniprot": "L3124",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(OCc1ccc(OC(F)(F)F)c(F)c1)N1CCc2cc(C(=O)N3CCc4[nH]nnc4C3)nn2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3125"
+    ],
+    "uniprot": "L3125",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1ccc2[nH]nnc2c1)N1C[C@H]2CN(C(=O)c3cc(OCC(F)(F)F)c4ccccc4n3)C[C@@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3126"
+    ],
+    "uniprot": "L3126",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.253674400688736,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3127"
+    ],
+    "uniprot": "L3127",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.884526412035177,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3128"
+    ],
+    "uniprot": "L3128",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "COCCNC(=O)c1cccc(-c2cc(Cl)c(C)cc2OCc2n[nH]c(=O)n2C)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3129"
+    ],
+    "uniprot": "L3129",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2n[nH]c(=O)n2C)c(-c2cccc(C(=O)N3CCOCC3)c2)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3130"
+    ],
+    "uniprot": "L3130",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.825892364204734,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3131"
+    ],
+    "uniprot": "L3131",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.89815013634028,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3132"
+    ],
+    "uniprot": "L3132",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.4355958228473,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3133"
+    ],
+    "uniprot": "L3133",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "COc1ncccc1-c1cc(Cl)c(C)cc1OCc1n[nH]c(=O)n1C"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3134"
+    ],
+    "uniprot": "L3134",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.817465364923768,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3135"
+    ],
+    "uniprot": "L3135",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cnc(OCC(F)(F)F)c(C2CC2)c1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3136"
+    ],
+    "uniprot": "L3136",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NC(=O)c1ccc(N2CCCC2)c(/C=C/c2ccc(OC(F)(F)F)cc2)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3137"
+    ],
+    "uniprot": "L3137",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.9684297480889175,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3138"
+    ],
+    "uniprot": "L3138",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3139"
+    ],
+    "uniprot": "L3139",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.188946495464315,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3140"
+    ],
+    "uniprot": "L3140",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.693766600811382,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3141"
+    ],
+    "uniprot": "L3141",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.590496159609677,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3142"
+    ],
+    "uniprot": "L3142",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.371988697571114,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3143"
+    ],
+    "uniprot": "L3143",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.060877966725505,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3144"
+    ],
+    "uniprot": "L3144",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.85569774641385,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3145"
+    ],
+    "uniprot": "L3145",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.90109995174182,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3146"
+    ],
+    "uniprot": "L3146",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CNC(=O)C[C@@H](NC(=O)Cn1cnc2ccc(N3CCN(C(C)=O)CC3)cc2c1=O)c1ccc([N+](=O)[O-])cc1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3148"
+    ],
+    "uniprot": "L3148",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2cc[nH]n2)c(C(C)(C)C)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3149"
+    ],
+    "uniprot": "L3149",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.678878342910176,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3150"
+    ],
+    "uniprot": "L3150",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.826164527231205,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3151"
+    ],
+    "uniprot": "L3151",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.037800554227733,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3152"
+    ],
+    "uniprot": "L3152",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(Cn1cnc2ccc(N3CCN(C(=O)C4CCCC4)CC3)cc2c1=O)NCc1ccc(Cl)c(Cl)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3153"
+    ],
+    "uniprot": "L3153",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CCOCC2)nc(C2CC2)c1)N1C[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3154"
+    ],
+    "uniprot": "L3154",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3155"
+    ],
+    "uniprot": "L3155",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)c1ccc(C(=O)N2C[C@H]3CN(C(=O)c4cnc(OC5CCOCC5)c(C5CC5)c4)C[C@@H]3C2)nc1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3156"
+    ],
+    "uniprot": "L3156",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.208477644476114,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3157"
+    ],
+    "uniprot": "L3157",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.306147299809975,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3158"
+    ],
+    "uniprot": "L3158",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.062061751207512,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3159"
+    ],
+    "uniprot": "L3159",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.876280589817346,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3160"
+    ],
+    "uniprot": "L3160",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.4896361725364,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3161"
+    ],
+    "uniprot": "L3161",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(Cn1cnc2ccc(N3CCN(C(=O)NC4CCCC4)CC3)cc2c1=O)NCc1ccc(Cl)c(Cl)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3162"
+    ],
+    "uniprot": "L3162",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -7.620682941575394,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3163"
+    ],
+    "uniprot": "L3163",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(Cn1cnc2ccc(N3CCN(C[C@H]4CCOC4)CC3)cc2c1=O)NCc1ccc(Cl)c(Cl)c1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3164"
+    ],
+    "uniprot": "L3164",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "NS(=O)(=O)CCCC(=O)N1CCN(c2ccc3ncn(CC(=O)NCc4ccc(Cl)c(Cl)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3165"
+    ],
+    "uniprot": "L3165",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.84886296777064,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3166"
+    ],
+    "uniprot": "L3166",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cn1c(=O)n(Cc2ccc(F)cc2)c2cnc(Cl)nc21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3167"
+    ],
+    "uniprot": "L3167",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CN(C)c1cc(C(=O)N2C[C@@H]3CN(C(=O)c4ccc5[nH]nnc5c4)C[C@H]3C2)cc(OCC2CCOCC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3168"
+    ],
+    "uniprot": "L3168",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(=O)N1CCN(c2ccc3nc(C)n(CC(=O)NCc4ccc(Cl)c(Cl)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3169"
+    ],
+    "uniprot": "L3169",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(=O)N1CCN(c2ccc3[nH]c(=O)n(CC(=O)NCc4ccc(Cl)c(Cl)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3170"
+    ],
+    "uniprot": "L3170",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -10.307267766683784,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3171"
+    ],
+    "uniprot": "L3171",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3172"
+    ],
+    "uniprot": "L3172",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2n[nH]c(=O)n2C)c(-c2cc(C(N)=O)ccc2OC(F)(F)F)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3173"
+    ],
+    "uniprot": "L3173",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(=O)N1CCN(c2ccc3ncn(CC(=O)N(C)Cc4ccc(C#N)c(Cl)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3174"
+    ],
+    "uniprot": "L3174",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(=O)N1CCC(c2ccc3ncn(CC(=O)N(C)Cc4ccc(C#N)c(Cl)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3175"
+    ],
+    "uniprot": "L3175",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CC(=O)N1CCC(c2ccc3ncn(CC(=O)N(C)Cc4ccc(Cl)c(OC(F)(F)F)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3176"
+    ],
+    "uniprot": "L3176",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(CCc1cnn[nH]1)N1C[C@H]2CN(C(=O)c3cc(OCC4CCOCC4)nc(C4CC4)c3)C[C@@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3177"
+    ],
+    "uniprot": "L3177",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.85727578457932,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3178"
+    ],
+    "uniprot": "L3178",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "C[C@]12CN(C(=O)OCc3ccc(OC(F)(F)F)cc3)C[C@@H]1CN(C(=O)c1ccc(S(N)(=O)=O)cc1)C2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3179"
+    ],
+    "uniprot": "L3179",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1cc(OCc2n[nH]c(=O)n2C)c(-c2cc(C(=O)N3CCN(C)C(=O)C3)ccc2F)cc1Cl"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3180"
+    ],
+    "uniprot": "L3180",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(CCc1c[nH]c(=O)o1)N1C[C@H]2CCN(C(=O)c3cc(OCC4CCOCC4)nc(C4CC4)c3)CC[C@H]2C1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3181"
+    ],
+    "uniprot": "L3181",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "C[C@@]12CN(C(=O)OCc3ccc(OC(F)(F)F)cc3)C[C@H]1CN(C(=O)c1ccc(S(N)(=O)=O)cc1)C2"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3182"
+    ],
+    "uniprot": "L3182",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CCOCC2)nc(C2CC2)c1)N1CC[C@@H]2CN(C(=O)c3ccc4[nH]nnc4c3)C[C@@H]2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3183"
+    ],
+    "uniprot": "L3183",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.369238953705313,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3184"
+    ],
+    "uniprot": "L3184",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.101588974537211,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3185"
+    ],
+    "uniprot": "L3185",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "COCC(=O)N1CCC(c2ccc3ncn(CC(=O)N(C)Cc4ccc(C#N)c(Cl)c4)c(=O)c3c2)CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3186"
+    ],
+    "uniprot": "L3186",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.956119010767017,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3187"
+    ],
+    "uniprot": "L3187",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "CN(Cc1ccc(C#N)c(Cl)c1)C(=O)Cn1cnc2ccc(C3CCN(C(=O)[C@@H]4CCO4)CC3)cc2c1=O"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3188"
+    ],
+    "uniprot": "L3188",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.012413563690462,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3189"
+    ],
+    "uniprot": "L3189",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.768192434185051,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3190"
+    ],
+    "uniprot": "L3190",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.894588400323512,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3191"
+    ],
+    "uniprot": "L3191",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cn1c(=O)[nH]c2ccc(C(=O)N3C[C@H]4CCN(C(=O)c5cc(OCC6CCOCC6)nc(C6CC6)c5)CC[C@H]4C3)cc21"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3192"
+    ],
+    "uniprot": "L3192",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -6.862854869668753,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3193"
+    ],
+    "uniprot": "L3193",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "O=C(c1cc(OCC2CCOCC2)nc(C2CC2)c1)N1CC[C@@H]2CN(C(=O)N3CCc4c(O)noc4C3)C[C@@H]2CC1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3194"
+    ],
+    "uniprot": "L3194",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -8.924837209007663,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3196"
+    ],
+    "uniprot": "L3196",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.502486878761786,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3197"
+    ],
+    "uniprot": "L3197",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -11.394569445805809,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3198"
+    ],
+    "uniprot": "L3198",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCN(c3ccc(S(N)(=O)=O)cc3F)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3199"
+    ],
+    "uniprot": "L3199",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCN(C(=O)c3ccc(S(N)(=O)=O)cc3)CC2)n1"
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3200"
+    ],
+    "uniprot": "L3200",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": -9.0406098362428,
+        "smi": NaN
+      }
+    ]
+  },
+  {
+    "pockets": [
+      "L3201"
+    ],
+    "uniprot": "L3201",
+    "sequence": "",
+    "ligands": [
+      {
+        "act": 0,
+        "smi": "Cc1nnn(Cc2cc(C(F)(F)F)ccc2CCC(=O)N2CCC(Cc3ccc(S(N)(=O)=O)cc3)CC2)n1"
+      }
+    ]
+  }
+]
