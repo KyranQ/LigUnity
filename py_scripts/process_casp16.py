@@ -222,7 +222,12 @@ def process_casp16_target(target_id: str, casp16_dir: str, output_dir: str,
     target_row = affinity_df[affinity_df['Target ID'] == target_id]
     if len(target_row) > 0:
         activity = target_row['binding_affinity'].values[0]
-        smi = target_row['ligand_smiles'].values[0] if 'ligand_smiles' in target_row.columns else smiles_dict.get(target_id, "")
+        # 处理可能的 NaN 值：优先使用 affinity CSV 中的 SMILES，如果为空或 NaN 则使用 TSV 文件中的
+        smi_from_csv = target_row['ligand_smiles'].values[0] if 'ligand_smiles' in target_row.columns else None
+        if smi_from_csv is None or (isinstance(smi_from_csv, float) and pd.isna(smi_from_csv)) or smi_from_csv == "":
+            smi = smiles_dict.get(target_id, "")
+        else:
+            smi = smi_from_csv
     else:
         activity = None
         smi = smiles_dict.get(target_id, "")
@@ -255,7 +260,10 @@ def load_casp16_smiles(casp16_dir: str) -> Dict[str, str]:
             try:
                 df = pd.read_csv(tsv_file, sep='\t')
                 if 'SMILES' in df.columns:
-                    smiles_dict[target_id] = df['SMILES'].values[0]
+                    smi_val = df['SMILES'].values[0]
+                    # 只有当 SMILES 不是 NaN 时才存储
+                    if not (isinstance(smi_val, float) and pd.isna(smi_val)):
+                        smiles_dict[target_id] = str(smi_val)
             except Exception as e:
                 print(f"警告: 无法读取 {tsv_file}: {e}")
         
@@ -266,7 +274,10 @@ def load_casp16_smiles(casp16_dir: str) -> Dict[str, str]:
                 try:
                     df = pd.read_csv(tsv_file, sep='\t')
                     if 'SMILES' in df.columns:
-                        smiles_dict[target_id] = df['SMILES'].values[0]
+                        smi_val = df['SMILES'].values[0]
+                        # 只有当 SMILES 不是 NaN 时才存储
+                        if not (isinstance(smi_val, float) and pd.isna(smi_val)):
+                            smiles_dict[target_id] = str(smi_val)
                 except Exception as e:
                     print(f"警告: 无法读取 {tsv_file}: {e}")
     
