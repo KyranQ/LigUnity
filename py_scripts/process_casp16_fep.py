@@ -214,12 +214,26 @@ def load_affinity_rows(csv_path, allowed_tasks):
     return rows
 
 
+def load_sequence_map(path):
+    if not path:
+        return {}
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Sequence map not found: {path}")
+    with open(path, "r") as handle:
+        if path.endswith(".json"):
+            return json.load(handle)
+        reader = csv.DictReader(handle)
+        return {row["Target ID"]: row["sequence"] for row in reader}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset-root", default="test_datasets/CASP16")
     parser.add_argument("--dist-threshold", type=float, default=6.0)
     parser.add_argument("--output-labels", default="casp16_fep_labels.json")
     parser.add_argument("--skip-lmdb", action="store_true", help="only write labels json")
+    parser.add_argument("--sequence-map", default="", help="optional Target ID -> sequence mapping (csv/json)")
+    parser.add_argument("--missing-sequence-value", default="UNKNOWN")
     args = parser.parse_args()
 
     dataset_root = args.dataset_root
@@ -246,6 +260,8 @@ def main():
     missing_targets = []
 
     extra_label_rows = []
+
+    sequence_map = load_sequence_map(args.sequence_map)
 
     for cfg in csv_configs:
         rows = load_affinity_rows(cfg["csv_path"], cfg["allowed_tasks"])
@@ -309,7 +325,7 @@ def main():
             {
                 "pockets": [target],
                 "uniprot": target,
-                "sequence": "",
+                "sequence": sequence_map.get(target, args.missing_sequence_value),
                 "ligands": [{"act": affinity, "smi": smiles}],
             }
         )
