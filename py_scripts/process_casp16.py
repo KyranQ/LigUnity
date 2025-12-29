@@ -236,7 +236,12 @@ def process_casp16_target(target_id: str, casp16_dir: str, output_dir: str,
 
 
 def load_casp16_smiles(casp16_dir: str) -> Dict[str, str]:
-    """加载所有 CASP16 SMILES。"""
+    """加载所有 CASP16 SMILES。
+    
+    支持两种目录结构:
+    1. L3000_SMILES/L3001.tsv (直接在目录下)
+    2. L3000_SMILES/L3000/L3001.tsv (在子目录下)
+    """
     smiles_dict = {}
     
     for series in ["L1000", "L2000", "L3000", "L4000"]:
@@ -244,6 +249,7 @@ def load_casp16_smiles(casp16_dir: str) -> Dict[str, str]:
         if not os.path.exists(smiles_dir):
             continue
         
+        # 直接在目录下查找 TSV 文件
         for tsv_file in glob(os.path.join(smiles_dir, "*.tsv")):
             target_id = os.path.basename(tsv_file).replace(".tsv", "")
             try:
@@ -252,6 +258,17 @@ def load_casp16_smiles(casp16_dir: str) -> Dict[str, str]:
                     smiles_dict[target_id] = df['SMILES'].values[0]
             except Exception as e:
                 print(f"警告: 无法读取 {tsv_file}: {e}")
+        
+        # 在子目录下查找 TSV 文件 (例如 L3000_SMILES/L3000/L3001.tsv)
+        for tsv_file in glob(os.path.join(smiles_dir, "*", "*.tsv")):
+            target_id = os.path.basename(tsv_file).replace(".tsv", "")
+            if target_id not in smiles_dict:  # 避免重复
+                try:
+                    df = pd.read_csv(tsv_file, sep='\t')
+                    if 'SMILES' in df.columns:
+                        smiles_dict[target_id] = df['SMILES'].values[0]
+                except Exception as e:
+                    print(f"警告: 无法读取 {tsv_file}: {e}")
     
     return smiles_dict
 
