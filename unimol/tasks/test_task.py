@@ -1215,6 +1215,104 @@ class ContrasRankTest(UnicoreTask):
 
         print(self.args.results_path.split("/")[-1], np.mean(rho_list), np.median(rho_list))
 
+    def test_casp16(self, model, **kwargs):
+        """CASP16 数据集的 zero-shot 测试"""
+        labels_path = f"{self.args.data}/CASP16/lmdbs/casp16_labels.json"
+        if not os.path.exists(labels_path):
+            print(f"错误: 找不到 CASP16 标签文件: {labels_path}")
+            print("请先运行: python py_scripts/process_casp16.py")
+            return
+        
+        labels_casp16 = json.load(open(labels_path))
+        ligands_dict = {x["pockets"][0]: x for x in labels_casp16}
+        rho_list = []
+        
+        for i, target in enumerate(ligands_dict.keys()):
+            if self.args.arch in ["DTA", "pocketregression"]:
+                rho = self.test_casp16_target_regression(target, model, ligands_dict[target])
+            else:
+                rho = self.test_casp16_target(target, model, ligands_dict[target])
+            if rho is not None:
+                rho_list.append(rho)
+        
+        if rho_list:
+            print(f"CASP16 结果: Mean R² = {np.mean(rho_list):.4f}, Median R² = {np.median(rho_list):.4f}")
+        else:
+            print("警告: 没有成功处理任何 CASP16 目标")
+
+    def test_casp16_target(self, target, model, label_info, **kwargs):
+        """测试单个 CASP16 目标"""
+        data_path = f"{self.args.data}/CASP16/lmdbs/{target}_lig.lmdb"
+        if not os.path.exists(data_path):
+            print(f"警告: 找不到配体数据: {data_path}")
+            return None
+        
+        mol_dataset = self.load_mols_dataset(data_path, "atoms", "coordinates")
+        bsz = 64
+        mol_reps = []
+        mol_smis = []
+
+        # generate mol data
+        mol_data = torch.utils.data.DataLoader(mol_dataset, batch_size=bsz, collate_fn=mol_dataset.collater)
+
+        for _, sample in enumerate(mol_data):
+            sample = unicore.utils.move_to_cuda(sample)
+            mol_emb = model.mol_forward(**sample["net_input"])
+            mol_emb = mol_emb.detach().cpu().numpy()
+            mol_reps.append(mol_emb)
+            mol_smis.extend(sample["smi_name"])
+        mol_reps = np.concatenate(mol_reps, axis=0)
+        
+        # generate pocket data
+        pocket_path = f"{self.args.data}/CASP16/lmdbs/{target}.lmdb"
+        if not os.path.exists(pocket_path):
+            print(f"警告: 找不到口袋数据: {pocket_path}")
+            return None
+        
+        pocket_dataset = self.load_pockets_dataset(pocket_path)
+        pocket_data = torch.utils.data.DataLoader(pocket_dataset, batch_size=bsz, collate_fn=pocket_dataset.collater)
+        pocket_reps = []
+
+        for _, sample in enumerate(pocket_data):
+            sample = unicore.utils.move_to_cuda(sample)
+            seq = label_info.get("sequence", "")
+            pocket_emb = model.pocket_forward(protein_sequences=seq, **sample["net_input"])
+            pocket_emb = pocket_emb.detach().cpu().numpy()
+            pocket_reps.append(pocket_emb)
+
+        pocket_reps = np.concatenate(pocket_reps, axis=0)
+        res = pocket_reps @ mol_reps.T
+
+        res_single = res.max(axis=0)
+        act_dict = {}
+        for lig in label_info["ligands"]:
+            if lig.get("smi") and lig.get("act") is not None:
+                act_dict[lig["smi"]] = float(lig["act"])
+        
+        from scipy import stats
+        if not act_dict:
+            print(f"警告: 目标 {target} 没有活性数据")
+            r2 = 0.0
+            real_dg = np.zeros(len(mol_smis))
+        else:
+            real_dg = np.array([act_dict.get(smi, 0.0) for smi in mol_smis])
+            pred_dg = res_single
+            corr = stats.pearsonr(real_dg, pred_dg).statistic
+            if corr < 0 or np.isnan(corr):
+                r2 = 0.0
+            else:
+                r2 = corr ** 2
+
+        result_dir = f"{self.args.results_path}/CASP16/{target}"
+        os.makedirs(result_dir, exist_ok=True)
+        np.save(f"{result_dir}/saved_mols_embed.npy", mol_reps)
+        np.save(f"{result_dir}/saved_target_embed.npy", pocket_reps)
+        np.save(f"{result_dir}/saved_labels.npy", real_dg)
+        json.dump(mol_smis, open(f"{result_dir}/saved_smis.json", "w"))
+        
+        print(f"  {target}: R² = {r2:.4f}")
+        return r2
+
     def inference_pdbbind(self, model, split="train", **kwargs):
         pdbbind_dataset = self.load_dataset(split, load_name=True, shuffle=False)
         num_data = len(pdbbind_dataset)
